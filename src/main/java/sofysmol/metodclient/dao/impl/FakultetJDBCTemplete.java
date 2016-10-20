@@ -1,5 +1,6 @@
 package sofysmol.metodclient.dao.impl;
 
+import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -10,6 +11,7 @@ import sofysmol.metodclient.dao.interf.FakultetDao;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by sofysmo on 08.10.16.
@@ -29,6 +31,9 @@ public class FakultetJDBCTemplete implements FakultetDao {
 
     public Fakultet getFakultet(String code) {
         return this.jdbcTemplate.queryForObject("select * from facultet where code_fak = \'"+ code +"\'",new FakultetMapper());
+    }
+    public List<Fakultet> getFakultets(){
+        return this.jdbcTemplate.query("select * from facultet",new FakultetMapper());
     }
     private static final class FakultetMapper implements RowMapper<Fakultet> {
 

@@ -10,6 +10,7 @@ import sofysmol.metodclient.data.KafedraHead;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by sofysmo on 08.10.16.
@@ -29,6 +30,10 @@ public class KafedraHeadJDBCTemplete implements KafedraHeadDao {
 
     public KafedraHead getKafedraHead(String codeKaf) {
         return this.jdbcTemplate.queryForObject("select * from KafedraHead where code_kaf = \'"+ codeKaf +"\'",new KafedraHeadMapper());
+    }
+
+    public List<KafedraHead> getKafedraHeads(){
+        return this.jdbcTemplate.query("select * from KafedraHead",new KafedraHeadMapper());
     }
     private static final class KafedraHeadMapper implements RowMapper<KafedraHead> {
 

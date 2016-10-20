@@ -1,0 +1,107 @@
+<div class="container" ng-controller="ModalsController as modals">
+    <modal-windows></modal-windows>
+    <h2>Методический отдел института</h2>
+    <uib-tabset active="active">
+        <uib-tab index="0" heading="Факультет">
+            <h3 class="bmargin20">Факультет</h3>
+            <div id="fakultet-content">
+                <div class="col-sm-8">
+                    <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Индетификатор</th>
+                                <th>Полное имя</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in fakultets">
+                                    <td>{{ x.code }}</td>
+                                    <td>{{ x.name }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn dropdown-toggle mdropdown" type="button" id="editButton" data-toggle="dropdown">
+                                                <img class="icon" src="./app/resources/images/ic_mode_edit_black_24dp_2x.png">
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li role="presentation"><a ng-click="modals.openEdit(x);" role="menuitem" tabindex="1" >Изменить</a></li>
+                                                <li role="presentation"><a role="menuitem" tabindex="2" >Удалить</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn" type="button" class="addRow">
+                                            <img class="icon" src="./app/resources/images/ic_add_black_24dp_2x.png">
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="">Отчет о всех лабораторных работах</a></li>
+                        <li><a href="">Разница в часах на лабораторные работы и практику на всех факультетах</a></li>
+                    </ul>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="1"  heading="Кафедра" disable="tab.disabled">
+            <h3 class="bmargin20">Кафедра</h3>
+            <div id="kafedra-content">
+                <div class="col-sm-8">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Индетификатор</th>
+                            <th>Полное имя</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in kafedras">
+                            <td>{{ x.code }}</td>
+                            <td>{{ x.name }}</td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <h4>Информация</h4>
+                    <ul>
+                        <li><a href="">Отчет о всех лабораторных работах</a></li>
+                        <li><a href="">Разница в часах на лабораторные работы и практику на всех факультетах</a></li>
+                    </ul>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="2" heading="Специальность" disable="tab.disabled">
+            <h3 class="bmargin20">Специальность</h3>
+            <div id="specialty-content">
+                <!--<table>
+                    <tr ng-repeat="x in spetialties">
+                        <td>{{ x.code }}</td>
+                        <td>{{ x.name }}</td>
+                    </tr>
+                </table>-->
+            </div>
+        </uib-tab>
+        <uib-tab index="3" heading="Дисциплина" disable="tab.disabled">
+            <h3 class="bmargin20">Дисциплина</h3>
+            <div id="discipline-content">
+                <!--<table>
+                    <tr ng-repeat="x in disciplines">
+                        <td>{{ x.code }}</td>
+                        <td>{{ x.name }}</td>
+                    </tr>
+                </table>-->
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</div>

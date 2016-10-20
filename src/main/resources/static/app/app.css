@@ -1,0 +1,7 @@
+.icon{
+    wight: 20px;
+    height: 20px;
+    -webkit-mask-image:-webkit-linear-gradient(top, rgba(52, 122, 183,.4), rgba(52, 122, 183,.4));
+    margin:0;
+    color: #337ab7
+}

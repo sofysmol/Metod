@@ -10,6 +10,7 @@ import sofysmol.metodclient.data.Form;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by sofysmo on 08.10.16.
@@ -29,6 +30,9 @@ public class FormJDBCTemplete implements FormDao {
 
     public Form getForm(String code) {
         return this.jdbcTemplate.queryForObject("select * from form where code_form = \'"+ code +"\'",new FormMapper());
+    }
+    public List<Form> getForms(){
+        return this.jdbcTemplate.query("select * from form",new FormMapper());
     }
     private static final class FormMapper implements RowMapper<Form> {
 

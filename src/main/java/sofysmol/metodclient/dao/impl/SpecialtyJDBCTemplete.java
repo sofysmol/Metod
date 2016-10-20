@@ -10,6 +10,7 @@ import sofysmol.metodclient.data.Specialty;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by sofysmo on 08.10.16.
@@ -29,6 +30,9 @@ public class SpecialtyJDBCTemplete implements SpecialtyDao {
 
     public Specialty getSpecialty(String code) {
         return this.jdbcTemplate.queryForObject("select * from specialty where code_spec = \'"+ code +"\'",new SpecialtyMapper());
+    }
+    public List<Specialty> getSpecialties(){
+        return this.jdbcTemplate.query("select * from specialty",new SpecialtyMapper());
     }
     private static final class SpecialtyMapper implements RowMapper<Specialty> {
 
