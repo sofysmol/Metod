@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import sofysmol.metodclient.dao.interf.FormDao;
 import sofysmol.metodclient.data.Form;
+import sofysmol.metodclient.data.Form;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -33,6 +34,21 @@ public class FormJDBCTemplete implements FormDao {
     }
     public List<Form> getForms(){
         return this.jdbcTemplate.query("select * from form",new FormMapper());
+    }
+    public void updateForm(Form form)
+    {
+        this.jdbcTemplate.update("update form set NameF = ? where code_form = ?" ,
+                form.getName(), form.getCode());
+    }
+
+    public void deleteForm(String code){
+        jdbcTemplate.update("delete from form where code_form = ?", code);
+    }
+
+    public void insertForm(Form form){
+        jdbcTemplate.update("insert into form (code_form, NameF) values (?,?)",
+                form.getCode(),form.getName());
+
     }
     private static final class FormMapper implements RowMapper<Form> {
 

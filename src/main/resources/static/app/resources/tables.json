@@ -1,0 +1,10 @@
+[{
+  "name": "fakultets",
+  "headers":["Код","Полное имя"],
+  "keys":["code","name"]
+},{
+  "name": "kafedras",
+  "headers":["Код","Полное имя", "Телефон", "Факультет"],
+  "keys":["code", "name","phone","codeFak"]
+}
+]

@@ -12,4 +12,7 @@ public interface FakultetDao {
     Fakultet getFakultet(String code);
     List<Fakultet> getFakultets();
     void setDataSource(DataSource ds);
+    void updateFakultet(Fakultet fakultet);
+    void deleteFakultet(String code);
+    void insertFakultet(Fakultet fakultet);
 }

@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import sofysmol.metodclient.dao.interf.SpecialtyDao;
 import sofysmol.metodclient.data.Specialty;
+import sofysmol.metodclient.data.Specialty;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -33,6 +34,21 @@ public class SpecialtyJDBCTemplete implements SpecialtyDao {
     }
     public List<Specialty> getSpecialties(){
         return this.jdbcTemplate.query("select * from specialty",new SpecialtyMapper());
+    }
+    public void updateSpecialty(Specialty specialty)
+    {
+        this.jdbcTemplate.update("update specialty set NameS = ? where code_spec = ?" ,
+                specialty.getName(), specialty.getCode());
+    }
+
+    public void deleteSpecialty(String code){
+        jdbcTemplate.update("delete from specialty where code_spec = ?", code);
+    }
+
+    public void insertSpecialty(Specialty specialty){
+        jdbcTemplate.update("insert into specialty (code_spec, NameS, qualification) values (?,?,?)",
+                specialty.getCode(),specialty.getName(), specialty.getQualification());
+
     }
     private static final class SpecialtyMapper implements RowMapper<Specialty> {
 

@@ -2,6 +2,7 @@ package sofysmol.metodclient.dao.interf;
 
 
 import sofysmol.metodclient.data.Kafedra;
+import sofysmol.metodclient.data.Kafedra;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -12,6 +13,9 @@ import java.util.List;
 public interface KafedraDao {
     Kafedra getKafedra(String code);
     List<Kafedra> getKafedras();
+    void updateKafedra(Kafedra fakultet);
+    void deleteKafedra(String code);
+    void insertKafedra(Kafedra fakultet);
     void setDataSource(DataSource ds);
 
 }

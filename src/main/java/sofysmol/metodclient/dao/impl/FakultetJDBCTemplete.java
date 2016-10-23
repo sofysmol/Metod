@@ -35,12 +35,26 @@ public class FakultetJDBCTemplete implements FakultetDao {
     public List<Fakultet> getFakultets(){
         return this.jdbcTemplate.query("select * from facultet",new FakultetMapper());
     }
+    public void updateFakultet(Fakultet fakultet)
+    {
+        this.jdbcTemplate.update("update facultet set NameF = ? where code_fak = ?" ,
+                fakultet.getName(), fakultet.getCode());
+    }
+
+    public void deleteFakultet(String code){
+        jdbcTemplate.update("delete from facultet where code_fak = ?", code);
+    }
+
+    public void insertFakultet(Fakultet fakultet){
+        jdbcTemplate.update("insert into facultet (code_fak, NameF) values (?,?)",
+                fakultet.getCode(),fakultet.getName());
+
+    }
     private static final class FakultetMapper implements RowMapper<Fakultet> {
 
         public Fakultet mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Fakultet Fakultet = new Fakultet();
-            Fakultet.setCode(rs.getString("code_fak"));
-            Fakultet.setName(rs.getString("NameF"));
+            Fakultet Fakultet = new Fakultet(rs.getString("code_fak"),
+                    rs.getString("NameF"));
             return Fakultet;
         }
     }

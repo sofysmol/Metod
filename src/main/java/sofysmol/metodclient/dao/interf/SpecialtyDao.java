@@ -1,6 +1,7 @@
 package sofysmol.metodclient.dao.interf;
 
 import sofysmol.metodclient.data.Specialty;
+import sofysmol.metodclient.data.Specialty;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -11,5 +12,9 @@ import java.util.List;
 public interface SpecialtyDao {
     Specialty getSpecialty(String code);
     List<Specialty> getSpecialties();
+    void updateSpecialty(Specialty fakultet);
+    void deleteSpecialty(String code);
+    void insertSpecialty(Specialty fakultet);
+    
     void setDataSource(DataSource ds);
 }

@@ -3,8 +3,7 @@ package sofysmol.metodclient.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sofysmol.metodclient.dao.interf.FakultetDao;
 import sofysmol.metodclient.dao.interf.KafedraDao;
 import sofysmol.metodclient.dao.interf.SpecialtyDao;
@@ -14,19 +13,16 @@ import sofysmol.metodclient.data.Specialty;
 
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+
 /**
  * Created by sofysmo on 17.10.16.
  */
 @RestController
-public class DBController {
+public class FakultetController {
     @Autowired
     FakultetDao fakultetDao;
 
-    @Autowired
-    KafedraDao kafedraDao;
-
-    @Autowired
-    SpecialtyDao specialtyDao;
 
     @RequestMapping("/fakultet")
     ResponseEntity<Fakultet> getFacultet() {
@@ -37,14 +33,20 @@ public class DBController {
     ResponseEntity<List<Fakultet>> getFacultets() {
         return new ResponseEntity<List<Fakultet>>(fakultetDao.getFakultets(), HttpStatus.OK);
     }
-    @RequestMapping("/kafedras")
-    ResponseEntity<List<Kafedra>> getKafedras() {
-        return new ResponseEntity<List<Kafedra>>(kafedraDao.getKafedras(), HttpStatus.OK);
+    @RequestMapping(value = "/fakultets/{code}", method= RequestMethod.PUT)
+    ResponseEntity<Fakultet> putFakultet( @PathVariable(value="code") String code, @RequestBody Fakultet fakultet){
+        //Fakultet fakultet = new Fakultet(code, name);
+        fakultetDao.updateFakultet(fakultet);
+        return new ResponseEntity<Fakultet>(fakultet, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/fakultets/{code}", method = RequestMethod.DELETE)
+    void deleteFakultet( @PathVariable(value="code") String code){
+        fakultetDao.deleteFakultet(code);
+    }
+    @RequestMapping(value = "/fakultets", method = RequestMethod.POST)
+    void addFakultet(@RequestBody Fakultet fakultet){
+        fakultetDao.insertFakultet(fakultet);
     }
 
-    @RequestMapping("/specialties")
-    ResponseEntity<List<Specialty>> getSpecialties() {
-        return new ResponseEntity<List<Specialty>>(specialtyDao.getSpecialties(), HttpStatus.OK);
-    }
 
 }

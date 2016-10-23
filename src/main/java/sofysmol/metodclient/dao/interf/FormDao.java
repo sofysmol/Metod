@@ -1,6 +1,7 @@
 package sofysmol.metodclient.dao.interf;
 
 import sofysmol.metodclient.data.Form;
+import sofysmol.metodclient.data.Form;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -12,4 +13,7 @@ public interface FormDao {
     Form getForm(String code);
     List<Form> getForms();
     void setDataSource(DataSource ds);
+    void updateForm(Form fakultet);
+    void deleteForm(String code);
+    void insertForm(Form fakultet);
 }

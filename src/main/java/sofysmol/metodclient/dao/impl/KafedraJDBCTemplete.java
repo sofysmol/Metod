@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import sofysmol.metodclient.dao.interf.KafedraDao;
 import sofysmol.metodclient.data.Kafedra;
+import sofysmol.metodclient.data.Kafedra;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -36,14 +37,33 @@ public class KafedraJDBCTemplete implements KafedraDao {
         return this.jdbcTemplate.query("select * from kafedra",new KafedraMapper());
     }
 
+    public void updateKafedra(Kafedra kafedra)
+    {
+        this.jdbcTemplate.update("update kafedra set NameK = ?, phone = ?, code_fak = ? where code_kaf = ?" ,
+                kafedra.getName(), kafedra.getPhone(),kafedra.getCodeFak(), kafedra.getCode());
+    }
+
+    public void deleteKafedra(String code){
+        jdbcTemplate.update("delete from kafedra where code_kaf = ?", code);
+    }
+
+    public void insertKafedra(Kafedra kafedra){
+        jdbcTemplate.update("insert into kafedra (code_kaf, NameK, phone, code_fak) values (?,?,?,?)",
+                kafedra.getCode(),kafedra.getName(), kafedra.getPhone(),kafedra.getCodeFak());
+
+    }
+    
     private static final class KafedraMapper implements RowMapper<Kafedra> {
 
         public Kafedra mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Kafedra Kafedra = new Kafedra();
-            Kafedra.setCode(rs.getString("code_kaf"));
-            Kafedra.setName(rs.getString("NameK"));
-            return Kafedra;
+            Kafedra kafedra = new Kafedra();
+            kafedra.setCode(rs.getString("code_kaf"));
+            kafedra.setName(rs.getString("NameK"));
+            kafedra.setPhone(rs.getString("phone"));
+            kafedra.setCodeFak(rs.getString("code_fak"));
+            return kafedra;
         }
     }
+
 
 }

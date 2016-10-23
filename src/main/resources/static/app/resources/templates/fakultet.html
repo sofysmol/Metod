@@ -1,0 +1,25 @@
+<div class="container" ng-controller="ModalsController as modals">
+    <modal-windows></modal-windows>
+    <h2>Факультет</h2>
+    <div id="fakultet-content">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="code">Код:</label>
+                <div class="col-sm-10">
+                    <input  type="text" class="form-control" ng-model="item.code"  id="code">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="name">Полное название:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="item.name" id="name">
+                </div>
+            </div>
+        </form>
+    </div>
+    <h3>Кафедры</h3>
+    <div id="kafedras-content">
+       <div ng-include src="'app/resources/templates/code-name.table.html'"></div>
+    </div>
+
+</div>

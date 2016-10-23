@@ -16,24 +16,38 @@ function instantiate(Type) {
         return new Type(response.data);
     }
 }
-angular.module('dataServices', []).
-factory('Fakultet', function($http){
-    var Fakultet = function(data){
-        angular.copy(data, this);
-    };
-    Fakultet.query = function() {
-        return $http.get('/fakultet').then(makeArray(Fakultet));
-    }
-    return Fakultet;
-}).factory('Fakultets', function($http){
+angular.module('dataServices', [])
+.factory('Fakultets', function($http){
        var Fakultets = function(data){
            angular.copy(data, this);
        };
        Fakultets.query = function() {
            return $http.get('/fakultets').then(makeArray(Fakultets));
        }
+       Fakultets.getByCode = function(code) {
+               return $http.get('/fakultets/'+code).then(instantiate(Fakultets));
+           }
        return Fakultets;
- })/*.factory('Specialties', function($http){
+ }).factory('Kafedras', function($http){
+                var Kafedras = function(data){
+                    angular.copy(data, this);
+                };
+                Kafedras.query = function() {
+                    return $http.get('/kafedras').then(makeArray(Kafedras));
+                }
+                Kafedras.getByCodeFakultet = function(code){
+                    return $http.get('/fakultets/'+code+'/kafedras').then(instantiate(Fakultets));
+                }
+                return Kafedras;
+   }).factory('TablesList', function($http){
+         var TablesList = function(data){
+             angular.copy(data, this);
+         };
+         TablesList.query = function() {
+             return $http.get('app/resources/tables.json').then(makeArray(TablesList));
+         }
+         return TablesList;
+     })/*.factory('Specialties', function($http){
            var Specialties = function(data){
                angular.copy(data, this);
            };
