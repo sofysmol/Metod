@@ -37,8 +37,8 @@ public class SpecialtyJDBCTemplete implements SpecialtyDao {
     }
     public void updateSpecialty(Specialty specialty)
     {
-        this.jdbcTemplate.update("update specialty set NameS = ? where code_spec = ?" ,
-                specialty.getName(), specialty.getCode());
+        this.jdbcTemplate.update("update specialty set NameS = ?, qualification = ? where code_spec = ?" ,
+                specialty.getName(), specialty.getQualification(), specialty.getCode());
     }
 
     public void deleteSpecialty(String code){
@@ -53,10 +53,11 @@ public class SpecialtyJDBCTemplete implements SpecialtyDao {
     private static final class SpecialtyMapper implements RowMapper<Specialty> {
 
         public Specialty mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Specialty Specialty = new Specialty();
-            Specialty.setCode(rs.getString("code_spec"));
-            Specialty.setName(rs.getString("NameS"));
-            return Specialty;
+            Specialty specialty = new Specialty(rs.getString("code_spec"),
+                    rs.getString("NameS"),
+                    rs.getString("qualification"));
+
+            return specialty;
         }
     }
 

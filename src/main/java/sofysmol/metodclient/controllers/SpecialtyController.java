@@ -3,13 +3,10 @@ package sofysmol.metodclient.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import sofysmol.metodclient.dao.interf.KafedraDao;
+import org.springframework.web.bind.annotation.*;
 import sofysmol.metodclient.dao.interf.SpecialtyDao;
-import sofysmol.metodclient.data.Kafedra;
+import sofysmol.metodclient.dao.interf.SpecialtyDao;
+import sofysmol.metodclient.data.Specialty;
 import sofysmol.metodclient.data.Specialty;
 
 import java.util.List;
@@ -26,10 +23,23 @@ public class SpecialtyController {
     ResponseEntity<List<Specialty>> getSpetialty() {
         return new ResponseEntity<List<Specialty>>(specialtyDao.getSpecialties(), HttpStatus.OK);
     }
-
-    /*@RequestMapping(value = "/kafedra/{code}/specialty", method = RequestMethod.GET)
+    @RequestMapping(value = "/specialties/{code}", method= RequestMethod.PUT)
+    Specialty putSpecialty( @PathVariable(value="code") String code,
+                        @RequestBody Specialty specialty){
+        specialtyDao.updateSpecialty(specialty);
+        return specialty;
+    }
+    @RequestMapping(value = "/specialties/{code}", method = RequestMethod.DELETE)
+    void deleteSpecialty( @PathVariable(value="code") String code){
+        specialtyDao.deleteSpecialty(code);
+    }
+    @RequestMapping(value = "/specialties", method = RequestMethod.POST)
+    void addSpecialty(@RequestBody Specialty specialty){;
+        specialtyDao.insertSpecialty(specialty);
+    }
+    /*@RequestMapping(value = "/specialty/{code}/specialty", method = RequestMethod.GET)
     void getSpetialtyByFakultet( @PathVariable(value="code") String code){
-        // kafedraDao.
+        // specialtyDao.
     }*/
 
 }

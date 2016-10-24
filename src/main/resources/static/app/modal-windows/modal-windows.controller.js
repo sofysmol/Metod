@@ -1,5 +1,6 @@
 function ModalsController($scope, $uibModal, $log,$http, $rootScope)
  {
+    var parent = $scope.$parent
     var self = this
     self.animationsEnabled = true;
     self.openEdit = function(x){
@@ -10,8 +11,7 @@ function ModalsController($scope, $uibModal, $log,$http, $rootScope)
             templateUrl: 'editModal.html',
             scope: $scope,
             controller: function(){$scope.item = angular.copy(x)
-                            var parent = $scope.$parent
-                            var table = parent.tableList[parent.index]
+                            var table = parent.tables[parent.index]
                             $scope.table = table
                             modals = this
                             modals.ok = function(){
@@ -37,7 +37,7 @@ function ModalsController($scope, $uibModal, $log,$http, $rootScope)
     };
     self.delete = function(x){
         var parent = $scope.$parent
-        $http.delete("/"+parent.tableList[parent.index].name+"/"+x.code).then(function successCallback(){
+        $http.delete("/"+parent.tables[parent.index].name+"/"+x.code).then(function successCallback(){
            var index = parent.tableContent[parent.index].indexOf(x)
            parent.tableContent[parent.index].splice(index, 1)
         }, function errorCallback(){
@@ -52,8 +52,7 @@ function ModalsController($scope, $uibModal, $log,$http, $rootScope)
                     templateUrl: 'additionModal.html',
                     scope: $scope,
                     controller: function(){
-                                    var parent = $scope.$parent
-                                    var table = parent.tableList[parent.index]
+                                    var table = parent.tables[parent.index]
                                     $scope.table = table
                                     $scope.item = {}
                                     modals = this

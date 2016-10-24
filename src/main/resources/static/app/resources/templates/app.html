@@ -2,56 +2,18 @@
     <modal-windows></modal-windows>
     <h2>Методический отдел института</h2>
     <uib-tabset active="active">
-        <uib-tab index="0" ng-click="ctrl.switchTab(0)" heading="Факультет">
-            <h3 class="bmargin20">Факультет</h3>
-            <div id="fakultet-content">
+        <uib-tab ng-repeat="tab in tabs" index="$index" ng-click="ctrl.switchTab($index)" heading="{{tab.name}}">
+            <h3 class="bmargin20">{{tabs.name}}</h3>
+            <div class="content">
                 <div class="col-sm-8" >
                     <div ng-include src="'app/resources/templates/code-name.table.html'"></div>
                 </div>
                 <div class="col-sm-4">
                     <h4>Информация</h4>
                     <ul>
-                        <li><a href="">Отчет о всех лабораторных работах</a></li>
-                        <li><a href="">Разница в часах на лабораторные работы и практику на всех факультетах</a></li>
+                        <li ng-repeat="rep in tab.reports"><a href="{{rep.link}}">{{rep.header}}</a></li>
                     </ul>
                 </div>
-            </div>
-        </uib-tab>
-        <uib-tab index="1" ng-click="ctrl.switchTab(1)"  heading="Кафедра" disable="tab.disabled">
-            <h3 class="bmargin20">Кафедра</h3>
-            <div id="kafedra-content">
-                <div class="col-sm-8">
-                    <div ng-include src="'app/resources/templates/code-name.table.html'"></div>
-                </div>
-                <div class="col-sm-4">
-                    <h4>Информация</h4>
-                    <ul>
-                        <li><a href="">Отчет о всех лабораторных работах</a></li>
-                        <li><a href="">Разница в часах на лабораторные работы и практику на всех факультетах</a></li>
-                    </ul>
-                </div>
-            </div>
-        </uib-tab>
-        <uib-tab index="2" heading="Специальность" disable="tab.disabled">
-            <h3 class="bmargin20">Специальность</h3>
-            <div id="specialty-content">
-                <!--<table>
-                    <tr ng-repeat="x in spetialties">
-                        <td>{{ x.code }}</td>
-                        <td>{{ x.name }}</td>
-                    </tr>
-                </table>-->
-            </div>
-        </uib-tab>
-        <uib-tab index="3" heading="Дисциплина" disable="tab.disabled">
-            <h3 class="bmargin20">Дисциплина</h3>
-            <div id="discipline-content">
-                <!--<table>
-                    <tr ng-repeat="x in disciplines">
-                        <td>{{ x.code }}</td>
-                        <td>{{ x.name }}</td>
-                    </tr>
-                </table>-->
             </div>
         </uib-tab>
     </uib-tabset>

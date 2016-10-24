@@ -1,7 +1,7 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th ng-repeat="x in tableList[index].headers">
+            <th ng-repeat="x in tables[index].headers">
                 {{x}}
             </th>
             <th></th>
@@ -9,7 +9,10 @@
         </thead>
         <tbody>
         <tr ng-repeat="x in tableContent[index]">
-            <td ng-repeat="field in Utils.keys(x).slice(0, -1)">{{x[field]}}</td>
+            <td ng-repeat="field in Utils.keys(x).slice(0, -1)">
+                <a ng-href="/#/{{tables[index].name}}/info/{{x['code']|escape}}">
+                    {{x[field]}}
+                </a></td>
             <td>
                 <div class="dropdown">
                     <button class="btn dropdown-toggle mdropdown" type="button" id="editButton" data-toggle="dropdown">

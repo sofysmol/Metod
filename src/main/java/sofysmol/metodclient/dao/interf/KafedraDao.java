@@ -13,6 +13,7 @@ import java.util.List;
 public interface KafedraDao {
     Kafedra getKafedra(String code);
     List<Kafedra> getKafedras();
+    List<Kafedra> getKafedrasByFakultet(String code);
     void updateKafedra(Kafedra fakultet);
     void deleteKafedra(String code);
     void insertKafedra(Kafedra fakultet);

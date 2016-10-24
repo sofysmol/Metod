@@ -1,5 +1,8 @@
 package sofysmol.metodclient.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by sofysmo on 08.10.16.
  */
@@ -9,22 +12,16 @@ public class Kafedra {
     String phone;
     String codeFak;
 
-    public void setCode(String code) {
+    @JsonCreator
+    public Kafedra(@JsonProperty("code") String code,
+                    @JsonProperty("name") String name,
+                   @JsonProperty("phone") String phone,
+                   @JsonProperty("codeFak") String codeFak){
         this.code = code;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public void setCodeFak(String codeFak) {
         this.codeFak = codeFak;
     }
-
     public String getName() {
         return name;
     }

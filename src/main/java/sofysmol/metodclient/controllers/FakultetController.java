@@ -24,9 +24,9 @@ public class FakultetController {
     FakultetDao fakultetDao;
 
 
-    @RequestMapping("/fakultet")
-    ResponseEntity<Fakultet> getFacultet() {
-        return new ResponseEntity<Fakultet>(fakultetDao.getFakultet("ФКТИ"), HttpStatus.OK);
+    @RequestMapping("/fakultets/{code}")
+    ResponseEntity<Fakultet> getFacultetByCode(@PathVariable(value="code") String code) {
+        return new ResponseEntity<Fakultet>(fakultetDao.getFakultet(code), HttpStatus.OK);
     }
 
     @RequestMapping("/fakultets")

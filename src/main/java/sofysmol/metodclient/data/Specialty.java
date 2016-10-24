@@ -1,5 +1,8 @@
 package sofysmol.metodclient.data;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by sofysmo on 08.10.16.
  */
@@ -8,27 +11,24 @@ public class Specialty {
     String name;
     String qualification;
 
+    @JsonCreator
+    public Specialty(@JsonProperty("code") String code,
+                   @JsonProperty("name") String name,
+                   @JsonProperty("qualification") String qualification){
+        this.code = code;
+        this.name = name;
+        this.qualification = qualification;
+
+    }
     public String getCode() {
         return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getQualification() {
         return qualification;
-    }
-
-    public void setQualification(String qualification) {
-        this.qualification = qualification;
     }
 }

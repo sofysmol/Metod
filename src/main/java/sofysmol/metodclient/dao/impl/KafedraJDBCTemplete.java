@@ -37,6 +37,10 @@ public class KafedraJDBCTemplete implements KafedraDao {
         return this.jdbcTemplate.query("select * from kafedra",new KafedraMapper());
     }
 
+    public List<Kafedra> getKafedrasByFakultet(String code){
+        return this.jdbcTemplate.query("select * from kafedra where code_fak = \'"+code+"\'", new KafedraMapper());
+    }
+
     public void updateKafedra(Kafedra kafedra)
     {
         this.jdbcTemplate.update("update kafedra set NameK = ?, phone = ?, code_fak = ? where code_kaf = ?" ,
@@ -52,15 +56,15 @@ public class KafedraJDBCTemplete implements KafedraDao {
                 kafedra.getCode(),kafedra.getName(), kafedra.getPhone(),kafedra.getCodeFak());
 
     }
-    
+
     private static final class KafedraMapper implements RowMapper<Kafedra> {
 
         public Kafedra mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Kafedra kafedra = new Kafedra();
-            kafedra.setCode(rs.getString("code_kaf"));
-            kafedra.setName(rs.getString("NameK"));
-            kafedra.setPhone(rs.getString("phone"));
-            kafedra.setCodeFak(rs.getString("code_fak"));
+            Kafedra kafedra = new Kafedra(rs.getString("code_kaf"),
+                    rs.getString("NameK"),
+                    rs.getString("phone"),
+                    rs.getString("code_fak"));
+
             return kafedra;
         }
     }

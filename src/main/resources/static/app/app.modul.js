@@ -1,8 +1,9 @@
 /**
  * Created by user on 8/28/16.
  */
-var app = angular.module('metodClientApp', ['ngRoute','dataServices', 'ui.bootstrap', 'ui.bootstrap.tpls', 'modalWindows']);
-app.run(function($rootScope){
+var app = angular.module('metodClientApp', ['ngRoute','dataServices', 'ui.bootstrap',
+                        'ui.bootstrap.tpls', 'modalWindows']);
+app.run(function($rootScope, TablesList, TabsList){
       $rootScope.Utils = {
          keys: Object.keys,
          update: function(srcObj, destObj){
@@ -14,9 +15,9 @@ app.run(function($rootScope){
                   },
          range: function(n){
                 return Array.from(Array(n).keys())
-            }
+            },
+            encodeURI: encodeURIComponent
          }
-
 })
 app.config(function ($routeProvider) {
     $routeProvider
@@ -27,11 +28,18 @@ app.config(function ($routeProvider) {
                 controllerAs:'ctrl',
                 resolve:AppController.resolve
             }
-        ).when('/fakultet/info/:code',{
+        ).when('/fakultets/info/:code',{
             templateUrl: "app/resources/templates/fakultet.html",
             controller: FakultetController,
             resolve: FakultetController.resolve
+        }).when('/kafedras/info/:code',{
+            templateUrl: "app/resources/templates/kafedra.html",
+            controller: KafedraController,
+            resolve: KaferaController.resolve
         })
+});
+app.filter('escape', function() {
+  return window.encodeURIComponent;
 });
 app.service("otcDynamic", function($compile)
 {

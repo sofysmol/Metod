@@ -26,9 +26,9 @@ public class KafedraController {
         return new ResponseEntity<List<Kafedra>>(kafedraDao.getKafedras(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/kafedras/{code}/kafedras", method = RequestMethod.GET)
-    void getKafedrasByKafedra( @PathVariable(value="code") String code){
-       // kafedraDao.
+    @RequestMapping(value = "/fakultets/{code}/kafedras", method = RequestMethod.GET)
+    ResponseEntity<List<Kafedra>> getKafedrasByFakultets( @PathVariable(value="code") String code){
+       return new ResponseEntity<List<Kafedra>>(kafedraDao.getKafedrasByFakultet(code), HttpStatus.OK);
     }
     @RequestMapping(value = "/kafedras/{code}", method= RequestMethod.PUT)
     Kafedra putKafedra( @PathVariable(value="code") String code,
@@ -42,7 +42,6 @@ public class KafedraController {
     }
     @RequestMapping(value = "/kafedras", method = RequestMethod.POST)
     void addKafedra(@RequestBody Kafedra kafedra){
-        System.out.print(kafedra.getPhone());
         kafedraDao.insertKafedra(kafedra);
     }
 
