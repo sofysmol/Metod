@@ -17,7 +17,7 @@ import java.util.List;
  * Created by sofysmo on 08.10.16.
  */
 @Repository
-public class FakultetJDBCTemplete implements FakultetDao {
+public class FakultetJDBCTemplate implements FakultetDao {
     private DataSource dataSource;
 
     @Autowired

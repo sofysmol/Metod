@@ -11,8 +11,10 @@ import java.util.List;
 public interface DisciplineDao {
     Discipline getDiscipline(String code);
     List<Discipline> getDisciplines();
+    List<Discipline> getDisciplinesByScpecialty(String codeSpec, String codeForm, String codeKaf);
     void setDataSource(DataSource ds);
     void updateDiscipline(Discipline fakultet);
     void deleteDiscipline(String code);
     void insertDiscipline(Discipline fakultet);
+
 }

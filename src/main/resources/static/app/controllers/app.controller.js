@@ -7,6 +7,19 @@
     $scope.tabs = tabs
     $scope.tables = tables
     $scope.tableContent = [fakultets, kafedras, specialties, disciplines]
+    angular.forEach($scope.tableContent, function(content, key){
+        angular.forEach(content, function(s, k){
+            s.params = ""
+        })
+    })
+    /*for(s in $scope.tableContent[0])
+                    s.params = ""
+    for(s in $scope.tableContent[1])
+                        s.params = ""
+    for(s in $scope.tableContent[2])
+                        s.params = ""
+    for(s in $scope.tableContent[3])
+                        s.params = ""*/
     $scope.index = 0
     self.switchTab = function(index){
         $scope.index = index

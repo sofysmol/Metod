@@ -1,8 +1,14 @@
 function ModalsController($scope, $uibModal, $log,$http, $rootScope)
- {
+{
     var parent = $scope.$parent
     var self = this
     self.animationsEnabled = true;
+    $scope.init = function(editController)
+      {
+        $scope.editController = editController;
+
+      };
+
     self.openEdit = function(x){
         $rootScope.modalInstance = $uibModal.open({
             animation: self.animationsEnabled,
@@ -10,7 +16,7 @@ function ModalsController($scope, $uibModal, $log,$http, $rootScope)
             ariaDescribedBy: 'modal-body-bottom',
             templateUrl: 'editModal.html',
             scope: $scope,
-            controller: function(){$scope.item = angular.copy(x)
+            controller: $scope.editController/*function(){$scope.item = angular.copy(x)
                             var table = parent.tables[parent.index]
                             $scope.table = table
                             modals = this
@@ -29,7 +35,7 @@ function ModalsController($scope, $uibModal, $log,$http, $rootScope)
                             }
                             modals.cancel = function(){
                                 $rootScope.modalInstance.close('a')
-                            }},
+                            }}*/,
             controllerAs: "modals",
             size: 'sm'
         });

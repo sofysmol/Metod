@@ -5,8 +5,6 @@ package sofysmol.metodclient; /**
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import sofysmol.metodclient.data.Fakultet;
-import sofysmol.metodclient.dao.impl.FakultetJDBCTemplete;
 
 @SpringBootApplication
 public class BootApplication {

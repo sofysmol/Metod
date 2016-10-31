@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sofysmol.metodclient.dao.interf.DisciplineDao;
 import sofysmol.metodclient.data.Discipline;
+import sofysmol.metodclient.data.Discipline;
+import sofysmol.metodclient.data.Specialty;
 
 import java.util.List;
 
@@ -17,6 +19,10 @@ public class DisciplineController {
     @Autowired
     DisciplineDao disciplineDao;
 
+    @RequestMapping("/disciplines/{code}")
+    ResponseEntity<Discipline> getFacultetByCode(@PathVariable(value="code") String code) {
+        return new ResponseEntity<Discipline>(disciplineDao.getDiscipline(code), HttpStatus.OK);
+    }
     @RequestMapping("/disciplines")
     ResponseEntity<List<Discipline>> getSpetialty() {
         return new ResponseEntity<List<Discipline>>(disciplineDao.getDisciplines(), HttpStatus.OK);
@@ -35,4 +41,14 @@ public class DisciplineController {
     void addDiscipline(@RequestBody Discipline discipline){;
         disciplineDao.insertDiscipline(discipline);
     }
+
+    @RequestMapping(value = {"/disciplines"}, params = {"code-spec","code-form", "code-kaf"})
+    ResponseEntity<List<Discipline>> getDisciplinesByCodeSpec(
+            @RequestParam(value="code-spec") String codeSpec,
+            @RequestParam(value="code-form") String codeForm,
+            @RequestParam(value="code-kaf") String codeKaf){
+        return new ResponseEntity<List<Discipline>>
+                (disciplineDao.getDisciplinesByScpecialty(codeSpec,codeForm,codeKaf), HttpStatus.OK);
+    }
+
 }

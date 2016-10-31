@@ -17,7 +17,7 @@ import java.util.List;
  * Created by sofysmo on 08.10.16.
  */
 @Repository
-public class KafedraJDBCTemplete implements KafedraDao {
+public class KafedraJDBCTemplate implements KafedraDao {
     private DataSource dataSource;
 
     @Autowired

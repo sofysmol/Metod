@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import sofysmol.metodclient.dao.interf.KafedraDao;
 import sofysmol.metodclient.dao.interf.KafedraDao;
 import sofysmol.metodclient.dao.interf.SpecialtyDao;
+import sofysmol.metodclient.data.Fakultet;
 import sofysmol.metodclient.data.Kafedra;
 import sofysmol.metodclient.data.Kafedra;
 import sofysmol.metodclient.data.Specialty;
@@ -21,6 +22,10 @@ public class KafedraController {
     @Autowired
     KafedraDao kafedraDao;
 
+    @RequestMapping("/kafedras/{code}")
+    ResponseEntity<Kafedra> getKafedraByCode(@PathVariable(value="code") String code) {
+        return new ResponseEntity<Kafedra>(kafedraDao.getKafedra(code), HttpStatus.OK);
+    }
     @RequestMapping("/kafedras")
     ResponseEntity<List<Kafedra>> getKafedras() {
         return new ResponseEntity<List<Kafedra>>(kafedraDao.getKafedras(), HttpStatus.OK);
@@ -40,6 +45,7 @@ public class KafedraController {
     void deleteKafedra( @PathVariable(value="code") String code){
         kafedraDao.deleteKafedra(code);
     }
+
     @RequestMapping(value = "/kafedras", method = RequestMethod.POST)
     void addKafedra(@RequestBody Kafedra kafedra){
         kafedraDao.insertKafedra(kafedra);

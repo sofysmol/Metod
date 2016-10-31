@@ -17,7 +17,7 @@ import java.util.List;
  * Created by sofysmo on 08.10.16.
  */
 @Repository
-public class FormJDBCTemplete implements FormDao {
+public class FormJDBCTemplate implements FormDao {
     private DataSource dataSource;
 
     @Autowired

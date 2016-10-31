@@ -43,6 +43,7 @@ public class FakultetController {
     void deleteFakultet( @PathVariable(value="code") String code){
         fakultetDao.deleteFakultet(code);
     }
+
     @RequestMapping(value = "/fakultets", method = RequestMethod.POST)
     void addFakultet(@RequestBody Fakultet fakultet){
         fakultetDao.insertFakultet(fakultet);

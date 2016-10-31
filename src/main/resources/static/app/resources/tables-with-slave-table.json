@@ -1,0 +1,41 @@
+[{
+  "name":"fakultets",
+  "mainHeader":"Факультет",
+  "slaveName":"kafedras",
+  "slaveHeader":"Кафедра",
+  "mainHeaders":["Код","Название"],
+  "mainKeys":["code","name"],
+  "slaveHeaders":["Код","Название"],
+  "slaveKeys":["code","name"]
+},{
+  "name":"kafedras",
+  "mainHeader":"Кафедра",
+  "slaveName":"specialties",
+  "slaveHeader":"Специальность",
+  "mainHeaders":["Код","Название","Телефон","Факультет"],
+  "mainKeys":["code","name","phone", "codeFak"],
+  "slaveHeaders":["Код","Название", "Форма обучения"],
+  "slaveKeys":["code","name", "codeForm"]
+},
+  {
+    "name":"specialties",
+    "mainHeader":"Специальность",
+    "slaveName":"disciplines",
+    "slaveHeader":"Учебная программа",
+    "mainHeaders":["Код","Название","Кафедра", "Форма обучения", "Квалификация"],
+    "mainKeys":["code","name","codeKaf", "codeForm", "qualification"],
+    "slaveHeaders":["Код","Название"],
+    "slaveKeys":["code","name"]
+  },
+  {
+    "name":"discipline",
+    "mainHeader":"Дисциплина",
+    "slaveName":"sheduler",
+    "slaveHeader":"Рассписание",
+    "mainHeaders":["Специальность","Кафедра", "Форма обучения"],
+    "mainKeys":["spec","kaf","form"],
+    "slaveHeaders":["Семестр","Лекции(ч.)", "Лаб.р.(ч.)", "Практика(ч.)","Курсовая(ч.)", "Отчетность"],
+    "slaveKeys":["semester","lecture", "lab","prak","kurs","report"]
+  }
+
+]

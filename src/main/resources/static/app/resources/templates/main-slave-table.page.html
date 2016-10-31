@@ -1,0 +1,17 @@
+<div class="container" ng-controller="ModalsController as modals">
+    <modal-windows></modal-windows>
+    <h2>{{page.mainHeader}}</h2>
+    <div id="main-content">
+        <form class="form-horizontal" role="form">
+            <div class="form-group" ng-repeat="i in Utils.range(page.mainHeaders.length)">
+                <label for="{{page.mainKeys[i]}}">{{page.mainHeaders[i]}}</label>
+                <input type="text" class="form-control" ng-model="item[page.mainKeys[i]]"  id="{{page.mainKeys[i]}}" readonly>
+            </div>
+        </form>
+    </div>
+    <h3>{{page.slaveHeader}}</h3>
+    <div id="slave-content">
+        <div ng-include src="'app/resources/templates/code-name.table.html'"></div>
+    </div>
+
+</div>

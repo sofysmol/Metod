@@ -9,8 +9,8 @@
         </thead>
         <tbody>
         <tr ng-repeat="x in tableContent[index]">
-            <td ng-repeat="field in Utils.keys(x).slice(0, -1)">
-                <a ng-href="/#/{{tables[index].name}}/info/{{x['code']|escape}}">
+            <td ng-repeat="field in tables[index].keys">
+                <a ng-href="/#/{{tables[index].name}}/info/{{x['code']|escape}}{{x['params']}}">
                     {{x[field]}}
                 </a></td>
             <td>

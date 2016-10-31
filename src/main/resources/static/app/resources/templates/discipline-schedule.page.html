@@ -1,0 +1,27 @@
+<div class="container" ng-controller="ModalsController as modals">
+    <modal-windows></modal-windows>
+    <h2>Дисциплина</h2>
+    <div id="main-content">
+        <h3>{{name}}</h3>
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="kaf_name">Кафедра</label>
+                <input type="text" value="{{kaf.name}}" class="form-control"  id="kaf_name" readonly>
+            </div>
+            <div class="form-group">
+                <label for="spec_name">Специальность</label>
+                <input type="text" value="{{spec.name}}" class="form-control"  id="spec_name" readonly>
+            </div>
+            <div class="form-group">
+                <label for="form">Форма обучения</label>
+                <input type="text" value="{{form.name}}" class="form-control"  id="form" readonly>
+            </div>
+        </form>
+    </div>
+    <h3>Расписание</h3>
+    <div id="slave-content">
+
+    </div>
+    </div>
+
+</div>

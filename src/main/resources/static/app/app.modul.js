@@ -16,7 +16,7 @@ app.run(function($rootScope, TablesList, TabsList){
          range: function(n){
                 return Array.from(Array(n).keys())
             },
-            encodeURI: encodeURIComponent
+         encodeURI: encodeURIComponent
          }
 })
 app.config(function ($routeProvider) {
@@ -29,14 +29,23 @@ app.config(function ($routeProvider) {
                 resolve:AppController.resolve
             }
         ).when('/fakultets/info/:code',{
-            templateUrl: "app/resources/templates/fakultet.html",
+            templateUrl: "app/resources/templates/main-slave-table.page.html",
             controller: FakultetController,
             resolve: FakultetController.resolve
         }).when('/kafedras/info/:code',{
-            templateUrl: "app/resources/templates/kafedra.html",
+            templateUrl: "app/resources/templates/main-slave-table.page.html",
             controller: KafedraController,
-            resolve: KaferaController.resolve
-        })
+            resolve: KafedraController.resolve
+        }).when('/specialties/info/:codeSpec/:codeKaf/:codeForm',{
+                      templateUrl: "app/resources/templates/main-slave-table.page.html",
+                      controller: SpecialtyController,
+                      resolve: SpecialtyController.resolve
+        }).when('/disciplines/info/:codeDis/:codeSpec/:codeKaf/:codeForm',{
+                                templateUrl: "app/resources/templates/main-slave-table.page.html",
+                                controller: DisciplineController,
+                                resolve: DisciplineController.resolve
+                            })
+
 });
 app.filter('escape', function() {
   return window.encodeURIComponent;

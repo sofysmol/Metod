@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ModalsController as modals">
+<div class="container" ng-controller="ModalsController as modals" ng-init="init(openEdit1)">
     <modal-windows></modal-windows>
     <h2>Методический отдел института</h2>
     <uib-tabset active="active">
@@ -9,7 +9,7 @@
                     <div ng-include src="'app/resources/templates/code-name.table.html'"></div>
                 </div>
                 <div class="col-sm-4">
-                    <h4>Информация</h4>
+                    <h4>Отчеты</h4>
                     <ul>
                         <li ng-repeat="rep in tab.reports"><a href="{{rep.link}}">{{rep.header}}</a></li>
                     </ul>
