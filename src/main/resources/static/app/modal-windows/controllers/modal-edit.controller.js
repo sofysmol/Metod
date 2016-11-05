@@ -9,7 +9,7 @@ function openEdit1($scope, $http, $rootScope){
          $http({
                method: 'PUT',
                data: $scope.newItem,
-               url: encodeURI('/'+table.name+'/'+$scope.newItem.code)
+               url: encodeURI('/'+table.name)
          }).then(function successCallback(response) {
                       $rootScope.Utils.update(response.data, x)
                       $rootScope.modalInstance.close('a')

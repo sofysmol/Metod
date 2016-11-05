@@ -1,7 +1,8 @@
 function openDelete1($scope, $http){
     return function(x){
           var parent = $scope.$parent
-          $http.delete("/"+parent.tables[parent.index].name+"/"+x.code).then(function successCallback(){
+          //$http.delete("/"+parent.tables[parent.index].name+"/"+x.code).then(function successCallback(){
+          $http.delete("/"+parent.tables[parent.index].name, {params:{code:x.code}}).then(function successCallback(){
           var index = parent.tableContent[parent.index].indexOf(x)
           parent.tableContent[parent.index].splice(index, 1)
           }, function errorCallback(){

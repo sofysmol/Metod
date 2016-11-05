@@ -36,9 +36,7 @@ angular.module('dataServices', [])
        Fakultets.getByCode = function(code) {
                return $http.get('/fakultets/'+code).then(instantiate(Fakultets));
            }
-       Fakultets.put=function(fakultets){
-            return
-       }
+
        return Fakultets;
  }).factory('Kafedras', function($http){
                 var Kafedras = function(data){

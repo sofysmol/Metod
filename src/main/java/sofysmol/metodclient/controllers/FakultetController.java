@@ -33,14 +33,13 @@ public class FakultetController {
     ResponseEntity<List<Fakultet>> getFacultets() {
         return new ResponseEntity<List<Fakultet>>(fakultetDao.getFakultets(), HttpStatus.OK);
     }
-    @RequestMapping(value = "/fakultets/{code}", method= RequestMethod.PUT)
-    ResponseEntity<Fakultet> putFakultet( @PathVariable(value="code") String code, @RequestBody Fakultet fakultet){
-        //Fakultet fakultet = new Fakultet(code, name);
+    @RequestMapping(value = "/fakultets", method= RequestMethod.PUT)
+    ResponseEntity<Fakultet> updateFakultet(@RequestBody Fakultet fakultet){
         fakultetDao.updateFakultet(fakultet);
         return new ResponseEntity<Fakultet>(fakultet, HttpStatus.OK);
     }
-    @RequestMapping(value = "/fakultets/{code}", method = RequestMethod.DELETE)
-    void deleteFakultet( @PathVariable(value="code") String code){
+    @RequestMapping(value = "/fakultets", method = RequestMethod.DELETE)
+    void deleteFakultet( @RequestParam(value="code") String code){
         fakultetDao.deleteFakultet(code);
     }
 
