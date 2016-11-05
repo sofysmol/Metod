@@ -50,5 +50,22 @@ public class KafedraController {
     void addKafedra(@RequestBody Kafedra kafedra){
         kafedraDao.insertKafedra(kafedra);
     }
+    @RequestMapping(value = "/kafedras/specialty", method = RequestMethod.POST)
+    void addSpecialty(@RequestParam("codeKaf") String codeKaf,
+                      @RequestParam("code") String codeSpec,
+                      @RequestParam("codeForm") String codeForm){
+        kafedraDao.insertSpecialty(codeSpec, codeKaf, codeForm);
+    }
+    @RequestMapping(value = "/kafedras/specialty", method = RequestMethod.DELETE)
+    void deleteSpecialty(@RequestParam("codeKaf") String codeKaf,
+                      @RequestParam("code") String codeSpec,
+                      @RequestParam("codeForm") String codeForm){
+        kafedraDao.deleteSpecialty(codeSpec, codeKaf, codeForm);
+    }
+
+    /*@RequestMapping(value = "/kafedras", method = RequestMethod.POST)
+    void addKafedraByKaf(@RequestBody Kafedra kafedra){
+        kafedraDao.insertKafedra(kafedra);
+    }*/
 
 }

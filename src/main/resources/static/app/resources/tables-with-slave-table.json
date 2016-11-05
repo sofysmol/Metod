@@ -5,8 +5,8 @@
   "slaveHeader":"Кафедра",
   "mainHeaders":["Код","Название"],
   "mainKeys":["code","name"],
-  "slaveHeaders":["Код","Название"],
-  "slaveKeys":["code","name"]
+  "slaveHeaders":["Код","Название","Телефон"],
+  "slaveKeys":["code","name", "phone"]
 },{
   "name":"kafedras",
   "mainHeader":"Кафедра",
@@ -31,7 +31,7 @@
     "name":"discipline",
     "mainHeader":"Дисциплина",
     "slaveName":"sheduler",
-    "slaveHeader":"Рассписание",
+    "slaveHeader":"Расписание",
     "mainHeaders":["Специальность","Кафедра", "Форма обучения"],
     "mainKeys":["spec","kaf","form"],
     "slaveHeaders":["Семестр","Лекции(ч.)", "Лаб.р.(ч.)", "Практика(ч.)","Курсовая(ч.)", "Отчетность"],

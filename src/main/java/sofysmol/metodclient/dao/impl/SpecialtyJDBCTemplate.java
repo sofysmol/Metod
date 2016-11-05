@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 import sofysmol.metodclient.dao.interf.SpecialtyDao;
+import sofysmol.metodclient.data.Sheduler;
 import sofysmol.metodclient.data.Specialty;
 import sofysmol.metodclient.data.Specialty;
 import sofysmol.metodclient.data.Specialty;
@@ -67,7 +68,25 @@ public class SpecialtyJDBCTemplate implements SpecialtyDao {
     public void insertSpecialty(Specialty specialty){
         jdbcTemplate.update("insert into specialty (code_spec, NameS, qualification) values (?,?,?)",
                 specialty.getCode(),specialty.getName(), specialty.getQualification());
-
+    }
+    public void insertDiscipline(String codeDis,String codeSpec,
+                          String codeKaf,String codeForm,
+                          Sheduler sh){
+        jdbcTemplate.update("insert into spec_dis_form" +
+                " (code_dis, code_spec, code_kaf, code_form," +
+                " semester, h_lec, h_lab, h_pr, h_kurs, report)" +
+                " values (?,?,?,?,?,?,?,?,?,?)",
+                codeDis, codeSpec, codeKaf, codeForm, sh.getSemester(),
+                sh.getLecture(), sh.getLab(), sh.getPrak(), sh.getKurs(),
+                sh.getReport());
+    }
+    public void deleteDiscipline(String codeDis,
+                                 String codeSpec,
+                                 String codeKaf,
+                                 String codeForm){
+        jdbcTemplate.update("delete from spec_dis_form" +
+                        " where code_kaf=? AND code_spec=? AND code_form=? AND code_dis=?",
+                codeKaf, codeSpec, codeForm, codeDis);
     }
     private static final class SpecialtyMapper implements RowMapper<Specialty> {
 

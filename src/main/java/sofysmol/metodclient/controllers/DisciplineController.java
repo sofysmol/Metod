@@ -9,6 +9,7 @@ import sofysmol.metodclient.data.Discipline;
 import sofysmol.metodclient.data.Discipline;
 import sofysmol.metodclient.data.Specialty;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -20,11 +21,11 @@ public class DisciplineController {
     DisciplineDao disciplineDao;
 
     @RequestMapping("/disciplines/{code}")
-    ResponseEntity<Discipline> getFacultetByCode(@PathVariable(value="code") String code) {
+    ResponseEntity<Discipline> getDisciplineByCode(@PathVariable(value="code") String code) {
         return new ResponseEntity<Discipline>(disciplineDao.getDiscipline(code), HttpStatus.OK);
     }
     @RequestMapping("/disciplines")
-    ResponseEntity<List<Discipline>> getSpetialty() {
+    ResponseEntity<List<Discipline>> getDisciplines() {
         return new ResponseEntity<List<Discipline>>(disciplineDao.getDisciplines(), HttpStatus.OK);
     }
     @RequestMapping(value = "/disciplines/{code}", method= RequestMethod.PUT)
@@ -37,6 +38,7 @@ public class DisciplineController {
     void deleteDiscipline( @PathVariable(value="code") String code){
         disciplineDao.deleteDiscipline(code);
     }
+
     @RequestMapping(value = "/disciplines", method = RequestMethod.POST)
     void addDiscipline(@RequestBody Discipline discipline){;
         disciplineDao.insertDiscipline(discipline);
@@ -46,9 +48,17 @@ public class DisciplineController {
     ResponseEntity<List<Discipline>> getDisciplinesByCodeSpec(
             @RequestParam(value="code-spec") String codeSpec,
             @RequestParam(value="code-form") String codeForm,
-            @RequestParam(value="code-kaf") String codeKaf){
+            @RequestParam(value="code-kaf") String codeKaf) throws SQLException {
         return new ResponseEntity<List<Discipline>>
-                (disciplineDao.getDisciplinesByScpecialty(codeSpec,codeForm,codeKaf), HttpStatus.OK);
+                (disciplineDao.getDisciplinesBySpecialty(codeSpec,codeForm,codeKaf), HttpStatus.OK);
+    }
+    @RequestMapping(value = "/disciplines/sheduler", method = RequestMethod.DELETE)
+    void deleteSheduler(@RequestParam("codeKaf") String codeKaf,
+                        @RequestParam("codeForm") String codeForm,
+                        @RequestParam("codeDis") String codeDis,
+                        @RequestParam("codeSpec") String codeSpec,
+                        @RequestParam("semester") String semester){
+        disciplineDao.deleteSheduler(semester, codeDis,codeSpec,codeKaf, codeForm);
     }
 
 }

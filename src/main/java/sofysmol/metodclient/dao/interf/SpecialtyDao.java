@@ -1,6 +1,7 @@
 package sofysmol.metodclient.dao.interf;
 
 import sofysmol.metodclient.data.Kafedra;
+import sofysmol.metodclient.data.Sheduler;
 import sofysmol.metodclient.data.Specialty;
 import sofysmol.metodclient.data.Specialty;
 
@@ -19,6 +20,9 @@ public interface SpecialtyDao {
     void updateSpecialty(Specialty fakultet);
     void deleteSpecialty(String code);
     void insertSpecialty(Specialty fakultet);
-    
+    void insertDiscipline(String codeDis,String codeSpec,
+                          String codeKaf,String codeForm,
+                          Sheduler sheduler);
     void setDataSource(DataSource ds);
+    void deleteDiscipline(String codeDis, String codeSpec, String codeKaf, String codeForm);
 }

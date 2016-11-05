@@ -3,84 +3,47 @@ function ModalsController($scope, $uibModal, $log,$http, $rootScope)
     var parent = $scope.$parent
     var self = this
     self.animationsEnabled = true;
-    $scope.init = function(editController)
+    //let editController;
+    //let addController;
+    //let deleteController
+    /*$scope.init = function(x)///editController)
       {
-        $scope.editController = editController;
+        switch(x){
+            case 1:{
+                editController = openEdit1($scope,$http,$rootScope)
+                addController = openAdd1($scope,$http,$rootScope)
+                deleteController = openDelete1($scope)
+            }
 
-      };
+        }
+        //$scope.edit = editController;
+
+      };*/
 
     self.openEdit = function(x){
         $rootScope.modalInstance = $uibModal.open({
             animation: self.animationsEnabled,
             ariaLabelledBy: 'modal-title-bottom',
             ariaDescribedBy: 'modal-body-bottom',
-            templateUrl: 'editModal.html',
+            templateUrl: parent.templateEdit,
             scope: $scope,
-            controller: $scope.editController/*function(){$scope.item = angular.copy(x)
-                            var table = parent.tables[parent.index]
-                            $scope.table = table
-                            modals = this
-                            modals.ok = function(){
-                                 $http({
-                                        method: 'PUT',
-                                        data: $scope.item,
-                                        url: encodeURI('/'+table.name+'/'+$scope.item.code)
-                                 }).then(function successCallback(response) {
-                                     $rootScope.Utils.update(response.data, x)
-                                     $rootScope.modalInstance.close('a')
-                                 }, function errorCallback(response) {
-                                      $rootScope.modalInstance.close('a')
-                                      alert("Ошибка: не получилось изменить данные")
-                                 });
-                            }
-                            modals.cancel = function(){
-                                $rootScope.modalInstance.close('a')
-                            }}*/,
+            controller: parent.editController($scope,$http,$rootScope)(x),
             controllerAs: "modals",
-            size: 'sm'
+            size: 'lg'
         });
 
     };
-    self.delete = function(x){
-        var parent = $scope.$parent
-        $http.delete("/"+parent.tables[parent.index].name+"/"+x.code).then(function successCallback(){
-           var index = parent.tableContent[parent.index].indexOf(x)
-           parent.tableContent[parent.index].splice(index, 1)
-        }, function errorCallback(){
-            alert("Ошибка удаления")
-        })
-    }
+    self.delete = parent.deleteController($scope,$http)
     self.openAddition= function(){
         $rootScope.modalInstance = $uibModal.open({
                     animation: self.animationsEnabled,
                     ariaLabelledBy: 'modal-title-bottom',
                     ariaDescribedBy: 'modal-body-bottom',
-                    templateUrl: 'additionModal.html',
+                    templateUrl: parent.templateAddition,
                     scope: $scope,
-                    controller: function(){
-                                    var table = parent.tables[parent.index]
-                                    $scope.table = table
-                                    $scope.item = {}
-                                    modals = this
-                                    modals.ok = function(){
-                                             $http({
-                                                    method: 'POST',
-                                                    data: $scope.item,
-                                                    url: encodeURI('/'+table.name)
-                                             }).then(function successCallback(response) {
-                                                 parent.tableContent[parent.index].push($scope.item)
-                                                 $rootScope.modalInstance.close('a')
-                                             }, function errorCallback(response) {
-                                                  alert("Ошибка: не получилось добавить данные")
-                                                  $rootScope.modalInstance.close('a')
-                                             });
-                                        }
-                                     modals.cancel = function(){
-                                                 $rootScope.modalInstance.close('a')
-                                        }
-                                     },
+                    controller: parent.addController($scope,$http,$rootScope)(),
                     controllerAs: "modals",
-                    size: 'sm'
+                    size: 'lg'
                 });
     }
  }

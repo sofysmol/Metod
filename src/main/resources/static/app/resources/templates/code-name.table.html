@@ -10,16 +10,18 @@
         <tbody>
         <tr ng-repeat="x in tableContent[index]">
             <td ng-repeat="field in tables[index].keys">
-                <a ng-href="/#/{{tables[index].name}}/info/{{x['code']|escape}}{{x['params']}}">
+                <a ng-show = "canHref" ng-href="/#/{{tables[index].name}}/info/{{x['code']|escape}}{{x['params']}}">
                     {{x[field]}}
-                </a></td>
+                </a>
+                <span ng-hide = "canHref">{{x[field]}}</span>
+            </td>
             <td>
                 <div class="dropdown">
                     <button class="btn dropdown-toggle mdropdown" type="button" id="editButton" data-toggle="dropdown">
                         <img class="icon" src="./app/resources/images/ic_mode_edit_black_24dp_2x.png">
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a ng-click="modals.openEdit(x);" role="menuitem" tabindex="1" >Изменить</a></li>
+                        <li ng-show ="canEdit" role="presentation"><a ng-click="modals.openEdit(x);" role="menuitem" tabindex="1" >Изменить</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="2" ng-click="modals.delete(x);">Удалить</a></li>
                     </ul>
                 </div>

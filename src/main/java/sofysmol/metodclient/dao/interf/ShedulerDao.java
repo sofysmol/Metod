@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface ShedulerDao {
     List<Sheduler> getSheduler(String codeDis, String codeKaf, String codeSpec, String codeForm);
+    void updateSheduler(String codeDis, String codeKaf, String codeSpec, String codeForm, Sheduler sheduler);
 }

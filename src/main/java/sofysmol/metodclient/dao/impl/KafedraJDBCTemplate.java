@@ -29,6 +29,14 @@ public class KafedraJDBCTemplate implements KafedraDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    public void insertSpecialty(String codeSpec, String codeKaf,String codeForm){
+        jdbcTemplate.update("insert into kaf_spec_form (code_kaf, code_spec, code_form) values (?,?,?)",
+                codeKaf,codeSpec, codeForm);
+    }
+    public void deleteSpecialty(String codeSpec, String codeKaf,String codeForm){
+        jdbcTemplate.update("delete from kaf_spec_form where code_kaf= ? AND code_spec= ? AND code_form= ?",
+                codeKaf,codeSpec,codeForm);
+    }
     public Kafedra getKafedra(String code) {
         return this.jdbcTemplate.queryForObject("select * from kafedra where code_kaf = \'"+ code +"\'",new KafedraMapper());
     }

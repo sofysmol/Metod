@@ -36,6 +36,15 @@ public class ShedulerJDBCTemplate implements ShedulerDao {
                         codeKaf, codeForm, codeSpec, codeDis).toString(),
                 new ShedulerJDBCTemplate.ShedulerMapper());
     }
+    public void updateSheduler(String codeDis, String codeKaf, String codeSpec,
+                               String codeForm, Sheduler sh){
+                jdbcTemplate.update("update spec_dis_form set " +
+                        " h_lec=?, h_lab=?, h_pr=?, h_kurs=?, report=? where code_dis=? " +
+                        "and code_spec=? and code_kaf=? and code_form=? and semester=?",
+                        sh.getLecture(),sh.getLab(), sh.getPrak(),
+                        sh.getKurs(),sh.getReport(), codeDis,
+                        codeSpec,codeKaf,codeForm, sh.getSemester());
+    }
     private static final class ShedulerMapper implements RowMapper<Sheduler> {
 
         public Sheduler mapRow(ResultSet rs, int rowNum) throws SQLException {

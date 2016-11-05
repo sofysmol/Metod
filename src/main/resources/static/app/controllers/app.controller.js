@@ -7,6 +7,13 @@
     $scope.tabs = tabs
     $scope.tables = tables
     $scope.tableContent = [fakultets, kafedras, specialties, disciplines]
+    $scope.addController = openAdd1
+    $scope.deleteController = openDelete1
+    $scope.editController = openEdit1
+    $scope.templateAddition = 'additionModal.html'
+    $scope.templateEdit = 'editModal.html'
+    $scope.canEdit = true
+    $scope.canHref = true
     angular.forEach($scope.tableContent, function(content, key){
         angular.forEach(content, function(s, k){
             s.params = ""

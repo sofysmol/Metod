@@ -42,9 +42,14 @@ app.config(function ($routeProvider) {
                       resolve: SpecialtyController.resolve
         }).when('/disciplines/info/:codeDis/:codeSpec/:codeKaf/:codeForm',{
                                 templateUrl: "app/resources/templates/main-slave-table.page.html",
-                                controller: DisciplineController,
-                                resolve: DisciplineController.resolve
-                            })
+                                controller: DisciplineSpecController,
+                                resolve: DisciplineSpecController.resolve
+        })/*.when('/disciplines/info/:codeDis'){
+            templatesUrl: "app/resources/templates/main-slave-table.page.html",
+            controller: DisciplineController,
+            resolve: DisciplineController.resolve
+        }*/
+
 
 });
 app.filter('escape', function() {

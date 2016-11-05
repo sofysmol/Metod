@@ -3,7 +3,7 @@
         {{message}}
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="modals.ok()" >OK</button>
+        <button class="btn btn-primary" type="button" ng-click="modal.ok()" >OK</button>
     </div>
 </script>
 <script type="text/ng-template" id="additionModal.html">
@@ -14,14 +14,178 @@
         <form>
             <div class="form-group" ng-repeat="i in Utils.range(table.headers.length)">
                 <label for="{{table.keys[i]}}">{{table.headers[i]}}</label>
-                <input type="text" class="form-control" ng-model="item[table.keys[i]]"  id="{{table.keys[i]}}">
+                <input type="text" class="form-control" ng-model="newItem[table.keys[i]]"  id="{{table.keys[i]}}">
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="modals.ok()" >OK</button>
-        <button class="btn btn-warning" type="button" ng-click="modals.cancel()" >Cancel</button>
+        <button class="btn btn-primary" type="button" onclick="modals.ok()" >OK</button>
+        <button class="btn btn-warning" type="button" onclick="modals.cancel()" >Cancel</button>
     </div>
+</script>
+<script type="text/ng-template" id="additionModalWithChoiceSpec.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Добавить...</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="codeSpec">Код</label>
+                <select id="codeSpec" class="form-control" ng-model="specialties.selected" ng-options="s.code as s.code for s in specialties.options">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nameSpec">Название</label>
+                <select id="nameSpec" class="form-control" ng-model="specialties.selected" ng-options="s.code as s.name for s in specialties.options">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="formSpec">Форма обучения</label>
+                <select id="formSpec" class="form-control" ng-model="forms.selected" ng-options="f as f for f in forms.options">
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" onclick="modals.ok()" >OK</button>
+        <button class="btn btn-warning" type="button" onclick="modals.cancel()" >Cancel</button>
+    </div>
+</script>
+<script type="text/ng-template" id="additionModalWithChoiceDis.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Добавить...</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form class="form-inline">
+            <div class="row">
+            <div class="form-group col-md-4">
+                <label class="control-label" for="codeDis">Код</label>
+                <select id="codeDis" class="form-control" ng-model="disciplines.selected" ng-options="d.code as d.code for d in disciplines.options">
+                </select>
+            </div>
+            <div class="form-group  col-md-8">
+                <label class="control-label" for="nameSpec">Название</label>
+                <select id="nameSpec" class="form-control" ng-model="disciplines.selected" ng-options="d.code as d.name for d in disciplines.options">
+                </select>
+            </div>
+            </div>
+        </form>
+        <form class="form-inline">
+            <div class="row">
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="semester">Семестр</label>
+                <input type="text" class="form-control small" ng-model="newItem.semester"  id="semester">
+            </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="lek">Лекции(ч.)</label>
+                <input type="text" class="form-control small" ng-model="newItem.lecture"  id="lek">
+            </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="lab">Лаб.(ч.)</label>
+                <input type="text" class="form-control small" ng-model="newItem.lab"  id="lab">
+            </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="pr">Практика(ч.)</label>
+                <input type="text"  class="form-control small" ng-model="newItem.prak"  id="pr">
+            </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="kurs">Курсовая(ч.)</label>
+                <input type="text" class="form-control small" ng-model="newItem.kurs"  id="kurs">
+            </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label" for="report">Отчетность</label>
+                <input type="text"  class="form-control small" ng-model="newItem.report"  id="report">
+            </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" onclick="modals.ok()" >OK</button>
+        <button class="btn btn-warning" type="button" onclick="modals.cancel()" >Cancel</button>
+    </div>
+</script>
+<script type="text/ng-template" id="additionShedulerModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Добавить...</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form class="form-inline">
+            <div class="row">
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="semester">Семестр</label>
+                    <input type="text" class="form-control small" ng-model="newItem.semester"  id="semester">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="lek">Лекции(ч.)</label>
+                    <input type="text" class="form-control small" ng-model="newItem.lecture"  id="lek">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="lab">Лаб.(ч.)</label>
+                    <input type="text" class="form-control small" ng-model="newItem.lab"  id="lab">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="pr">Практика(ч.)</label>
+                    <input type="text"  class="form-control small" ng-model="newItem.prak"  id="pr">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="kurs">Курсовая(ч.)</label>
+                    <input type="text" class="form-control small" ng-model="newItem.kurs"  id="kurs">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="report">Отчетность</label>
+                    <input type="text"  class="form-control small" ng-model="newItem.report"  id="report">
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" onclick="modals.ok()" >OK</button>
+        <button class="btn btn-warning" type="button" onclick="modals.cancel()" >Cancel</button>
+    </div>
+
+</script>
+<script type="text/ng-template" id="editShedulerModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Редактировать...</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form class="form-inline">
+            <div class="row">
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="semester">Семестр</label>
+                    <input type="text" class="form-control small" ng-model="newItem.semester"  id="semester" readonly>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="lek">Лекции(ч.)</label>
+                    <input type="text" class="form-control small" ng-model="newItem.lecture"  id="lek">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="lab">Лаб.(ч.)</label>
+                    <input type="text" class="form-control small" ng-model="newItem.lab"  id="lab">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="pr">Практика(ч.)</label>
+                    <input type="text"  class="form-control small" ng-model="newItem.prak"  id="pr">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="kurs">Курсовая(ч.)</label>
+                    <input type="text" class="form-control small" ng-model="newItem.kurs"  id="kurs">
+                </div>
+                <div class="form-group col-sm-2">
+                    <label class="control-label" for="report">Отчетность</label>
+                    <input type="text"  class="form-control small" ng-model="newItem.report"  id="report">
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" onclick="modals.ok()" >OK</button>
+        <button class="btn btn-warning" type="button" onclick="modals.cancel()" >Cancel</button>
+    </div>
+
 </script>
 <script type="text/ng-template" id="editModal.html">
         <div class="modal-header">
@@ -31,12 +195,13 @@
             <form>
                 <div class="form-group" ng-repeat="i in Utils.range(table.headers.length)">
                     <label for="{{table.keys[i]}}">{{table.headers[i]}}</label>
-                    <input type="text" class="form-control" ng-model="item[table.keys[i]]"  id="{{table.keys[i]}}">
+                    <input ng-if="i==0" type="text" class="form-control" ng-model="newItem[table.keys[i]]"  id="{{table.keys[i]}}" readonly>
+                    <input ng-if="i!=0" type="text" class="form-control" ng-model="newItem[table.keys[i]]"  id="{{table.keys[i]}}">
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="modals.ok()" >OK</button>
-            <button class="btn btn-warning" type="button" ng-click="modals.cancel()" >Cancel</button>
+            <button class="btn btn-primary" type="button" onclick="modals.ok()" >OK</button>
+            <button class="btn btn-warning" type="button" onclick="modals.cancel()" >Cancel</button>
         </div>
 </script>
