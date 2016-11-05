@@ -1,6 +1,5 @@
 package sofysmol.metodclient.dao.impl;
 
-import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -8,8 +7,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
-import sofysmol.metodclient.data.Fakultet;
-import sofysmol.metodclient.dao.interf.FakultetDao;
+import sofysmol.metodclient.data.Faculty;
+import sofysmol.metodclient.dao.interf.FacultyDao;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -21,7 +20,7 @@ import java.util.Map;
  * Created by sofysmo on 08.10.16.
  */
 @Repository
-public class FakultetJDBCTemplate implements FakultetDao {
+public class FacultyJDBCTemplate implements FacultyDao {
     private DataSource dataSource;
 
     @Autowired
@@ -39,11 +38,11 @@ public class FakultetJDBCTemplate implements FakultetDao {
         getFakProc = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("getFakultet")
                 .returningResultSet("fakultet",
-                        new FakultetMapper());
+                        new FacultyMapper());
         getFaksProc = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("getFakultets")
                 .returningResultSet("fakultets",
-                        new FakultetMapper());
+                        new FacultyMapper());
         updateFakProc = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("updateFakultet");
         deleteFakProc = new SimpleJdbcCall(jdbcTemplate)
@@ -52,41 +51,41 @@ public class FakultetJDBCTemplate implements FakultetDao {
                 .withProcedureName("insertFakultet");
 
     }
-    public Fakultet getFakultet(String code) {
+    public Faculty getFaculty(String code) {
         SqlParameterSource in = new MapSqlParameterSource()
                 .addValue("code", code);
         Map m = getFakProc.execute(in);
-        return ((List<Fakultet>) m.get("fakultet")).get(0);
+        return ((List<Faculty>) m.get("fakultet")).get(0);
     }
-    public List<Fakultet> getFakultets(){
+    public List<Faculty> getFaculties(){
         Map m = getFaksProc.execute();
-        return ((List<Fakultet>) m.get("fakultets"));
+        return ((List<Faculty>) m.get("fakultets"));
     }
-    public void updateFakultet(Fakultet fakultet) {
+    public void updateFaculty(Faculty faculty) {
         SqlParameterSource in = new MapSqlParameterSource()
-                .addValue("code", fakultet.getCode())
-                .addValue("name", fakultet.getName());
+                .addValue("code", faculty.getCode())
+                .addValue("name", faculty.getName());
         updateFakProc.execute(in);
     }
 
-    public void deleteFakultet(String code){
+    public void deleteFaculty(String code){
         SqlParameterSource in = new MapSqlParameterSource()
                 .addValue("code", code);
         deleteFakProc.execute(in);
     }
 
-    public void insertFakultet(Fakultet fakultet){
+    public void insertFaculty(Faculty faculty){
         SqlParameterSource in = new MapSqlParameterSource()
-                .addValue("code", fakultet.getCode())
-                .addValue("name", fakultet.getName());
+                .addValue("code", faculty.getCode())
+                .addValue("name", faculty.getName());
         insertFakProc.execute(in);
     }
-    private static final class FakultetMapper implements RowMapper<Fakultet> {
+    private static final class FacultyMapper implements RowMapper<Faculty> {
 
-        public Fakultet mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Fakultet Fakultet = new Fakultet(rs.getString("code"),
+        public Faculty mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Faculty Faculty = new Faculty(rs.getString("code"),
                     rs.getString("name"));
-            return Fakultet;
+            return Faculty;
         }
     }
 

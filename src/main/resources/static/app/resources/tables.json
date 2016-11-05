@@ -1,5 +1,5 @@
 [{
-  "name": "fakultets",
+  "name": "faculties",
   "headers":["Код","Полное имя"],
   "keys":["code","name"]
 },{

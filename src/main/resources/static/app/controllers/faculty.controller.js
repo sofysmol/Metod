@@ -1,10 +1,10 @@
-function FakultetController($scope, fakultet, kafedras, tables, pages){
+function FacultyController($scope, faculty, kafedras, tables, pages){
     var self = this
     $scope.page = pages[0]
-    $scope.item = fakultet
+    $scope.item = faculty
     $scope.tables = tables
     $scope.index = 1
-    $scope.addController = openAddKafByFak(fakultet.code)
+    $scope.addController = openAddKafByFak(faculty.code)
     $scope.deleteController = openDelete1
     $scope.editController = openEdit1
     $scope.templateAddition = 'additionModal.html'
@@ -20,9 +20,9 @@ function FakultetController($scope, fakultet, kafedras, tables, pages){
         value.params=""
         })
 }
-FakultetController.resolve = {
-    fakultet:function($route, Fakultets){
-        return Fakultets.getByCode($route.current.params.code)
+FacultyController.resolve = {
+    faculty:function($route, Faculties){
+        return Faculties.getByCode($route.current.params.code)
     },
     kafedras:function($route, Kafedras){
         return Kafedras.getByCodeFakultet($route.current.params.code)

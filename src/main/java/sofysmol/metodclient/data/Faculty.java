@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Created by sofysmo on 08.10.16.
  */
-public class Fakultet {
+public class Faculty {
     private String code;
     private String name;
 
     @JsonCreator
-    public Fakultet(@JsonProperty("code") String code,
-                    @JsonProperty("name") String name){
+    public Faculty(@JsonProperty("code") String code,
+                   @JsonProperty("name") String name){
         this.code = code;
         this.name = name;
     }

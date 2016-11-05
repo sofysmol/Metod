@@ -28,10 +28,10 @@ app.config(function ($routeProvider) {
                 controllerAs:'ctrl',
                 resolve:AppController.resolve
             }
-        ).when('/fakultets/info/:code',{
+        ).when('/faculties/info/:code',{
             templateUrl: "app/resources/templates/main-slave-table.page.html",
-            controller: FakultetController,
-            resolve: FakultetController.resolve
+            controller: FacultyController,
+            resolve: FacultyController.resolve
         }).when('/kafedras/info/:code',{
             templateUrl: "app/resources/templates/main-slave-table.page.html",
             controller: KafedraController,

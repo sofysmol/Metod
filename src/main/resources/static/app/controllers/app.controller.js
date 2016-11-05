@@ -1,12 +1,12 @@
 /**
  * Created by user on 8/28/16.
  */
- function AppController($scope, otcDynamic, fakultets, kafedras,
+ function AppController($scope, otcDynamic, faculties, kafedras,
                         tables, specialties, disciplines, tabs){
     var self = this
     $scope.tabs = tabs
     $scope.tables = tables
-    $scope.tableContent = [fakultets, kafedras, specialties, disciplines]
+    $scope.tableContent = [faculties, kafedras, specialties, disciplines]
     $scope.addController = openAdd1
     $scope.deleteController = openDelete1
     $scope.editController = openEdit1
@@ -36,8 +36,8 @@
 }
 AppController.resolve = {
 
-    fakultets:function(Fakultets) {
-            return Fakultets.query();
+    faculties:function(Faculties) {
+            return Faculties.query();
             },
     kafedras:function(Kafedras){
             return Kafedras.query();

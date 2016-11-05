@@ -5,12 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sofysmol.metodclient.dao.interf.KafedraDao;
-import sofysmol.metodclient.dao.interf.KafedraDao;
-import sofysmol.metodclient.dao.interf.SpecialtyDao;
-import sofysmol.metodclient.data.Fakultet;
 import sofysmol.metodclient.data.Kafedra;
-import sofysmol.metodclient.data.Kafedra;
-import sofysmol.metodclient.data.Specialty;
 
 import java.util.List;
 
@@ -31,7 +26,7 @@ public class KafedraController {
         return new ResponseEntity<List<Kafedra>>(kafedraDao.getKafedras(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/fakultets/{code}/kafedras", method = RequestMethod.GET)
+    @RequestMapping(value = "/faculties/{code}/kafedras", method = RequestMethod.GET)
     ResponseEntity<List<Kafedra>> getKafedrasByFakultets( @PathVariable(value="code") String code){
        return new ResponseEntity<List<Kafedra>>(kafedraDao.getKafedrasByFakultet(code), HttpStatus.OK);
     }
