@@ -52,6 +52,18 @@ public class SpecialtyController {
     void addSpecialty(@RequestBody Specialty specialty){;
         specialtyDao.insertSpecialty(specialty);
     }
+    @RequestMapping(value = "/kafedras/specialty", method = RequestMethod.POST)
+    void addSpecialty(@RequestParam("codeKaf") String codeKaf,
+                      @RequestParam("code") String codeSpec,
+                      @RequestParam("codeForm") String codeForm){
+        specialtyDao.insertSpecialty(codeSpec, codeKaf, codeForm);
+    }
+    @RequestMapping(value = "/kafedras/specialty", method = RequestMethod.DELETE)
+    void deleteSpecialty(@RequestParam("codeKaf") String codeKaf,
+                         @RequestParam("code") String codeSpec,
+                         @RequestParam("codeForm") String codeForm){
+        specialtyDao.deleteSpecialty(codeSpec, codeKaf, codeForm);
+    }
     @RequestMapping(value = "/specialties/discipline", method = RequestMethod.POST)
     void addDiscipline(@RequestParam("codeKaf") String codeKaf,
                        @RequestParam("codeForm") String codeForm,
@@ -73,6 +85,7 @@ public class SpecialtyController {
                        @RequestParam("code") String codeDis){
         specialtyDao.deleteDiscipline(codeDis, codeSpec, codeKaf, codeForm);
     }
+
     /*@RequestMapping(value = "/specialty/{code}/specialty", method = RequestMethod.GET)
     void getSpetialtyByFakultet( @PathVariable(value="code") String code){
         // specialtyDao.

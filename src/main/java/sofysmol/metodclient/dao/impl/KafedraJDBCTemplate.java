@@ -3,8 +3,12 @@ package sofysmol.metodclient.dao.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 import sofysmol.metodclient.dao.interf.KafedraDao;
+import sofysmol.metodclient.data.Faculty;
 import sofysmol.metodclient.data.Kafedra;
 import sofysmol.metodclient.data.Kafedra;
 
@@ -12,6 +16,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sofysmo on 08.10.16.
@@ -19,7 +24,13 @@ import java.util.List;
 @Repository
 public class KafedraJDBCTemplate implements KafedraDao {
     private DataSource dataSource;
-
+    private SimpleJdbcCall getKafProc;
+    private SimpleJdbcCall getKafsProc;
+    private SimpleJdbcCall updateKafProc;
+    private SimpleJdbcCall deleteKafProc;
+    private SimpleJdbcCall insertKafProc;
+    private SimpleJdbcCall getKafsByFakProc;
+    
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
@@ -27,51 +38,76 @@ public class KafedraJDBCTemplate implements KafedraDao {
     public void setDataSource(DataSource ds) {
         this.dataSource = ds;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-
-    public void insertSpecialty(String codeSpec, String codeKaf,String codeForm){
-        jdbcTemplate.update("insert into kaf_spec_form (code_kaf, code_spec, code_form) values (?,?,?)",
-                codeKaf,codeSpec, codeForm);
-    }
-    public void deleteSpecialty(String codeSpec, String codeKaf,String codeForm){
-        jdbcTemplate.update("delete from kaf_spec_form where code_kaf= ? AND code_spec= ? AND code_form= ?",
-                codeKaf,codeSpec,codeForm);
+        getKafProc = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("getKafedra")
+                .returningResultSet("kafedra",
+                        new KafedraMapper());
+        getKafsProc = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("getKafedras")
+                .returningResultSet("kafedras",
+                        new KafedraMapper());
+        getKafsByFakProc = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("getKafedrasByFak")
+                .returningResultSet("kafedras",
+                        new KafedraMapper());
+        updateKafProc = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("updateKafedra");
+        deleteKafProc = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("deleteKafedra");
+        insertKafProc = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("insertKafedra");
     }
     public Kafedra getKafedra(String code) {
-        return this.jdbcTemplate.queryForObject("select * from kafedra where code_kaf = \'"+ code +"\'",new KafedraMapper());
+        SqlParameterSource in = new MapSqlParameterSource()
+                .addValue("code", code);
+        Map m = getKafProc.execute(in);
+        return ((List<Kafedra>) m.get("kafedra")).get(0);
     }
 
     public List<Kafedra> getKafedras(){
-        return this.jdbcTemplate.query("select * from kafedra",new KafedraMapper());
+        Map m = getKafsProc.execute();
+        return ((List<Kafedra>) m.get("kafedras"));
     }
 
     public List<Kafedra> getKafedrasByFakultet(String code){
-        return this.jdbcTemplate.query("select * from kafedra where code_fak = \'"+code+"\'", new KafedraMapper());
+        SqlParameterSource in = new MapSqlParameterSource()
+                .addValue("code", code);
+        Map m = getKafsByFakProc.execute(in);
+        return ((List<Kafedra>) m.get("kafedras"));
     }
 
     public void updateKafedra(Kafedra kafedra)
     {
-        this.jdbcTemplate.update("update kafedra set NameK = ?, phone = ?, code_fak = ? where code_kaf = ?" ,
-                kafedra.getName(), kafedra.getPhone(),kafedra.getCodeFak(), kafedra.getCode());
+        SqlParameterSource in = new MapSqlParameterSource()
+                .addValue("code", kafedra.getCode())
+                .addValue("name", kafedra.getName())
+                .addValue("phone", kafedra.getPhone())
+                .addValue("codeFak", kafedra.getCodeFak());
+        updateKafProc.execute(in);
     }
 
     public void deleteKafedra(String code){
-        jdbcTemplate.update("delete from kafedra where code_kaf = ?", code);
+        SqlParameterSource in = new MapSqlParameterSource()
+                .addValue("code", code);
+        deleteKafProc.execute(in);
     }
 
     public void insertKafedra(Kafedra kafedra){
-        jdbcTemplate.update("insert into kafedra (code_kaf, NameK, phone, code_fak) values (?,?,?,?)",
-                kafedra.getCode(),kafedra.getName(), kafedra.getPhone(),kafedra.getCodeFak());
-
+        SqlParameterSource in = new MapSqlParameterSource()
+                .addValue("code", kafedra.getCode())
+                .addValue("name", kafedra.getName())
+                .addValue("phone", kafedra.getPhone())
+                .addValue("codeFak", kafedra.getCodeFak());
+        insertKafProc.execute(in);
     }
 
     private static final class KafedraMapper implements RowMapper<Kafedra> {
 
         public Kafedra mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Kafedra kafedra = new Kafedra(rs.getString("code_kaf"),
-                    rs.getString("NameK"),
+            Kafedra kafedra = new Kafedra(rs.getString("code"),
+                    rs.getString("name"),
                     rs.getString("phone"),
-                    rs.getString("code_fak"));
+                    rs.getString("codeFak"));
 
             return kafedra;
         }

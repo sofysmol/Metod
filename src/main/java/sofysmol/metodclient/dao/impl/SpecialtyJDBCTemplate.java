@@ -69,6 +69,14 @@ public class SpecialtyJDBCTemplate implements SpecialtyDao {
         jdbcTemplate.update("insert into specialty (code_spec, NameS, qualification) values (?,?,?)",
                 specialty.getCode(),specialty.getName(), specialty.getQualification());
     }
+    public void insertSpecialty(String codeSpec, String codeKaf,String codeForm){
+        jdbcTemplate.update("insert into kaf_spec_form (code_kaf, code_spec, code_form) values (?,?,?)",
+                codeKaf,codeSpec, codeForm);
+    }
+    public void deleteSpecialty(String codeSpec, String codeKaf,String codeForm){
+        jdbcTemplate.update("delete from kaf_spec_form where code_kaf= ? AND code_spec= ? AND code_form= ?",
+                codeKaf,codeSpec,codeForm);
+    }
     public void insertDiscipline(String codeDis,String codeSpec,
                           String codeKaf,String codeForm,
                           Sheduler sh){

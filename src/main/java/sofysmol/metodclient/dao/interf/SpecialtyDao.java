@@ -20,6 +20,8 @@ public interface SpecialtyDao {
     void updateSpecialty(Specialty fakultet);
     void deleteSpecialty(String code);
     void insertSpecialty(Specialty fakultet);
+    void insertSpecialty(String codeSpec, String codeKaf,String codeForm);
+    void deleteSpecialty(String codeSpec, String codeKaf,String codeForm);
     void insertDiscipline(String codeDis,String codeSpec,
                           String codeKaf,String codeForm,
                           Sheduler sheduler);

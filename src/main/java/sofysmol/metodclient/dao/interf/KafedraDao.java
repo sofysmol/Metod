@@ -18,7 +18,6 @@ public interface KafedraDao {
     void deleteKafedra(String code);
     void insertKafedra(Kafedra fakultet);
     void setDataSource(DataSource ds);
-    void insertSpecialty(String codeSpec, String codeKaf,String codeForm);
-    void deleteSpecialty(String codeSpec, String codeKaf,String codeForm);
+
 
 }

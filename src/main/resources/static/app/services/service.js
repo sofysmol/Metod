@@ -46,10 +46,10 @@ angular.module('dataServices', [])
                     return $http.get('/kafedras').then(makeArray(Kafedras));
                 }
                 Kafedras.getByCodeFakultet = function(code){
-                    return $http.get('/faculties/'+code+'/kafedras').then(makeArray(Kafedras));
+                    return $http.get('/faculties/kafedras?codeFak='+code).then(makeArray(Kafedras));
                 }
                 Kafedras.getByCode = function(code) {
-                               return $http.get('/kafedras/'+code).then(instantiate(Kafedras));
+                               return $http.get('/kafedras?code='+code).then(instantiate(Kafedras));
                            }
                 return Kafedras;
    }).factory('Specialties', function($http){

@@ -37,11 +37,11 @@ public class FacultyJDBCTemplate implements FacultyDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         getFakProc = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("getFakultet")
-                .returningResultSet("fakultet",
+                .returningResultSet("faculty",
                         new FacultyMapper());
         getFaksProc = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("getFakultets")
-                .returningResultSet("fakultets",
+                .returningResultSet("faculties",
                         new FacultyMapper());
         updateFakProc = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("updateFakultet");
@@ -55,11 +55,11 @@ public class FacultyJDBCTemplate implements FacultyDao {
         SqlParameterSource in = new MapSqlParameterSource()
                 .addValue("code", code);
         Map m = getFakProc.execute(in);
-        return ((List<Faculty>) m.get("fakultet")).get(0);
+        return ((List<Faculty>) m.get("faculty")).get(0);
     }
     public List<Faculty> getFaculties(){
         Map m = getFaksProc.execute();
-        return ((List<Faculty>) m.get("fakultets"));
+        return ((List<Faculty>) m.get("faculties"));
     }
     public void updateFaculty(Faculty faculty) {
         SqlParameterSource in = new MapSqlParameterSource()
