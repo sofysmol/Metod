@@ -17,11 +17,11 @@ public class KafedraController {
     @Autowired
     KafedraDao kafedraDao;
 
-    @RequestMapping(value="/kafedras", params = {"code"})
+    @RequestMapping(value="/kafedras", params = {"code"}, method = RequestMethod.GET)
     ResponseEntity<Kafedra> getKafedraByCode(@RequestParam(value="code") String code) {
         return new ResponseEntity<Kafedra>(kafedraDao.getKafedra(code), HttpStatus.OK);
     }
-    @RequestMapping("/kafedras")
+    @RequestMapping(value = "/kafedras", method = RequestMethod.GET)
     ResponseEntity<List<Kafedra>> getKafedras() {
         return new ResponseEntity<List<Kafedra>>(kafedraDao.getKafedras(), HttpStatus.OK);
     }
@@ -41,7 +41,7 @@ public class KafedraController {
     }
 
     @RequestMapping(value = "/kafedras", method = RequestMethod.POST)
-    void addKafedra(@RequestBody Kafedra kafedra){
+    void insertKafedra(@RequestBody Kafedra kafedra){
         kafedraDao.insertKafedra(kafedra);
     }
 }

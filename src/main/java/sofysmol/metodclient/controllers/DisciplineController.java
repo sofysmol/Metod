@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import sofysmol.metodclient.dao.interf.DisciplineDao;
 import sofysmol.metodclient.data.Discipline;
 import sofysmol.metodclient.data.Discipline;
+import sofysmol.metodclient.data.Sheduler;
 import sofysmol.metodclient.data.Specialty;
 
 import java.sql.SQLException;
@@ -44,13 +45,34 @@ public class DisciplineController {
         disciplineDao.insertDiscipline(discipline);
     }
 
-    @RequestMapping(value = {"/disciplines"}, params = {"code-spec","code-form", "code-kaf"})
+    @RequestMapping(value = {"/disciplines"}, params = {"codeSpec","codeForm", "codeKaf"})
     ResponseEntity<List<Discipline>> getDisciplinesByCodeSpec(
-            @RequestParam(value="code-spec") String codeSpec,
-            @RequestParam(value="code-form") String codeForm,
-            @RequestParam(value="code-kaf") String codeKaf) throws SQLException {
+            @RequestParam(value="codeSpec") String codeSpec,
+            @RequestParam(value="codeForm") String codeForm,
+            @RequestParam(value="codeKaf") String codeKaf) throws SQLException {
         return new ResponseEntity<List<Discipline>>
                 (disciplineDao.getDisciplinesBySpecialty(codeSpec,codeForm,codeKaf), HttpStatus.OK);
+    }
+    @RequestMapping(value = "/specialties/discipline", method = RequestMethod.POST)
+    void addDiscipline(@RequestParam("codeKaf") String codeKaf,
+                       @RequestParam("codeForm") String codeForm,
+                       @RequestParam("codeSpec") String codeSpec,
+                       @RequestParam("code") String codeDis,
+                       @RequestParam("lecture") String lecture,
+                       @RequestParam("lab") String lab,
+                       @RequestParam("prak") String prak,
+                       @RequestParam("report") String report,
+                       @RequestParam("kurs") String kurs,
+                       @RequestParam("semester") String semester){
+        Sheduler sheduler = new Sheduler(semester,lecture,prak,lab,kurs,report);
+        disciplineDao.insertDiscipline(codeDis, codeSpec, codeKaf, codeForm, sheduler);
+    }
+    @RequestMapping(value = "/specialties/discipline", method = RequestMethod.DELETE)
+    void deleteDiscipline(@RequestParam("codeKaf") String codeKaf,
+                          @RequestParam("codeForm") String codeForm,
+                          @RequestParam("codeSpec") String codeSpec,
+                          @RequestParam("code") String codeDis){
+        disciplineDao.deleteDiscipline(codeDis, codeSpec, codeKaf, codeForm);
     }
     @RequestMapping(value = "/disciplines/sheduler", method = RequestMethod.DELETE)
     void deleteSheduler(@RequestParam("codeKaf") String codeKaf,
@@ -60,5 +82,6 @@ public class DisciplineController {
                         @RequestParam("semester") String semester){
         disciplineDao.deleteSheduler(semester, codeDis,codeSpec,codeKaf, codeForm);
     }
+
 
 }

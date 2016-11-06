@@ -36,19 +36,19 @@ public class FacultyJDBCTemplate implements FacultyDao {
         this.dataSource = ds;
         this.jdbcTemplate = new JdbcTemplate(dataSource);
         getFakProc = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("getFakultet")
+                .withProcedureName("getFaculty")
                 .returningResultSet("faculty",
                         new FacultyMapper());
         getFaksProc = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("getFakultets")
+                .withProcedureName("getFaculties")
                 .returningResultSet("faculties",
                         new FacultyMapper());
         updateFakProc = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("updateFakultet");
+                .withProcedureName("updateFaculty");
         deleteFakProc = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("deleteFakultet");
+                .withProcedureName("deleteFaculty");
         insertFakProc = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("insertFakultet");
+                .withProcedureName("insertFaculty");
 
     }
     public Faculty getFaculty(String code) {

@@ -1,6 +1,7 @@
 package sofysmol.metodclient.dao.interf;
 
 import sofysmol.metodclient.data.Discipline;
+import sofysmol.metodclient.data.Sheduler;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -20,5 +21,10 @@ public interface DisciplineDao {
     void deleteSheduler(String semester, String codeDis,
                         String codeSpec, String codeKaf,
                         String codeForm);
+    void insertDiscipline(String codeDis,String codeSpec,
+                          String codeKaf,String codeForm,
+                          Sheduler sheduler);
+
+    void deleteDiscipline(String codeDis, String codeSpec, String codeKaf, String codeForm);
 
 }

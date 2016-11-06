@@ -60,10 +60,10 @@ angular.module('dataServices', [])
                     return $http.get('/specialties').then(makeArray(Specialties));
                 }
                 Specialties.getByCodeKafedra = function(code){
-                    return $http.get("/specialties?code-kaf="+code).then(makeArray(Specialties));
+                    return $http.get("/specialties?codeKaf="+code).then(makeArray(Specialties));
                 }
                 Specialties.getByCodeKafAndForm = function(codeKaf, codeForm, codeSpec){
-                    return $http.get("/specialties?code-kaf={0}&code-form={1}&code-spec={2}"
+                    return $http.get("/specialties?codeKaf={0}&codeForm={1}&codeSpec={2}"
                         .format(codeKaf, codeForm, codeSpec)).then(instantiate(Specialties));
                 }
                 return Specialties;
@@ -78,11 +78,11 @@ angular.module('dataServices', [])
                     return $http.get('/disciplines/'+code).then(instantiate(Disciplines));
                  }
                  Disciplines.getByCodeSpecialty = function(codeSpec,codeForm, codeKaf){
-                    return $http.get('/disciplines?code-kaf={0}&code-form={1}&code-spec={2}'.format(codeKaf,
+                    return $http.get('/disciplines?codeKaf={0}&codeForm={1}&codeSpec={2}'.format(codeKaf,
                                         codeForm, codeSpec)).then(makeArray(Disciplines));
                                  }
                  Disciplines.getByCodeDisAndSpec = function(codeDis,codeSpec,codeForm, codeKaf){
-                    return $http.get('/disciplines?code-dis={3}&code-kaf={0}&code-form={1}&code-spec={2}'.format(codeKaf,
+                    return $http.get('/disciplines?code-dis={3}&codeKaf={0}&codeForm={1}&codeSpec={2}'.format(codeKaf,
                                         codeForm, codeSpec, codeDis)).then(instantiate(Disciplines));
                                  }
                  return Disciplines;
@@ -91,7 +91,7 @@ angular.module('dataServices', [])
                              angular.copy(data, this);
                          };
                          Sheduler.query = function(codeDis, codeKaf,codeForm, codeSpec) {
-                            return $http.get('/sheduler?code-dis={3}&code-kaf={0}&code-form={1}&code-spec={2}'.format(codeKaf,
+                            return $http.get('/sheduler?code-dis={3}&codeKaf={0}&codeForm={1}&codeSpec={2}'.format(codeKaf,
                                              codeForm, codeSpec, codeDis)).then(makeArray(Sheduler));
                          }
                          return Sheduler;

@@ -22,29 +22,29 @@ public class SpecialtyController {
     @Autowired
     SpecialtyDao specialtyDao;
 
-    @RequestMapping(value = {"/specialties"})
-    ResponseEntity<List<Specialty>> getSpetialty() {
+    @RequestMapping(value = {"/specialties"}, method = RequestMethod.GET)
+    ResponseEntity<List<Specialty>> getSpetialties() {
         return new ResponseEntity<List<Specialty>>(specialtyDao.getSpecialties(), HttpStatus.OK);
     }
-    @RequestMapping(value ={"/specialties"}, params = {"code-kaf", "code-form", "code-spec"})
-    ResponseEntity<Specialty> getSpetialtyByKafAndForm(@RequestParam("code-kaf") String codeKaf,
-                                                    @RequestParam("code-form") String codeForm,
-                                                       @RequestParam("code-spec") String codeSpec) {
+    @RequestMapping(value ={"/specialties"}, params = {"codeKaf", "codeForm", "codeSpec"},
+            method = RequestMethod.GET)
+    ResponseEntity<Specialty> getSpetialtyByKafAndForm(@RequestParam("codeKaf") String codeKaf,
+                                                       @RequestParam("codeForm") String codeForm,
+                                                       @RequestParam("codeSpec") String codeSpec) {
         Specialty s = specialtyDao.getSpecialty(codeKaf, codeForm, codeSpec);
         return new ResponseEntity<Specialty>(s, HttpStatus.OK);
     }
-    @RequestMapping(value = "/specialties", params={"code-kaf"})
-    ResponseEntity<List<Specialty>> getSpecialtysByKaf(@RequestParam("code-kaf") String code) throws SQLException{
+    @RequestMapping(value = "/specialties", params={"codeKaf"})
+    ResponseEntity<List<Specialty>> getSpecialtysByKaf(@RequestParam("codeKaf") String code) throws SQLException{
         return new ResponseEntity<List<Specialty>>(specialtyDao.getSpecialtiesByKafedra(code), HttpStatus.OK);
     }
-    @RequestMapping(value = "/specialties/{code}", method= RequestMethod.PUT)
-    Specialty putSpecialty( @PathVariable(value="code") String code,
-                        @RequestBody Specialty specialty){
+    @RequestMapping(value = "/specialties", method= RequestMethod.PUT)
+    Specialty putSpecialty(@RequestBody Specialty specialty){
         specialtyDao.updateSpecialty(specialty);
         return specialty;
     }
-    @RequestMapping(value = "/specialties/{code}", method = RequestMethod.DELETE)
-    void deleteSpecialty( @PathVariable(value="code") String code){
+    @RequestMapping(value = "/specialties", params = {"code"}, method = RequestMethod.DELETE)
+    void deleteSpecialty(@RequestParam(value="code") String code) {
         specialtyDao.deleteSpecialty(code);
     }
 
@@ -52,7 +52,7 @@ public class SpecialtyController {
     void addSpecialty(@RequestBody Specialty specialty){;
         specialtyDao.insertSpecialty(specialty);
     }
-    @RequestMapping(value = "/kafedras/specialty", method = RequestMethod.POST)
+    @RequestMapping(value = "/kafedras/specialty", params = {"codeKaf","code","codeForm"},method = RequestMethod.POST)
     void addSpecialty(@RequestParam("codeKaf") String codeKaf,
                       @RequestParam("code") String codeSpec,
                       @RequestParam("codeForm") String codeForm){
@@ -64,27 +64,7 @@ public class SpecialtyController {
                          @RequestParam("codeForm") String codeForm){
         specialtyDao.deleteSpecialty(codeSpec, codeKaf, codeForm);
     }
-    @RequestMapping(value = "/specialties/discipline", method = RequestMethod.POST)
-    void addDiscipline(@RequestParam("codeKaf") String codeKaf,
-                       @RequestParam("codeForm") String codeForm,
-                       @RequestParam("codeSpec") String codeSpec,
-                       @RequestParam("code") String codeDis,
-                       @RequestParam("lecture") String lecture,
-                       @RequestParam("lab") String lab,
-                       @RequestParam("prak") String prak,
-                       @RequestParam("report") String report,
-                       @RequestParam("kurs") String kurs,
-                       @RequestParam("semester") String semester){
-        Sheduler sheduler = new Sheduler(semester,lecture,prak,lab,kurs,report);
-        specialtyDao.insertDiscipline(codeDis, codeSpec, codeKaf, codeForm, sheduler);
-    }
-    @RequestMapping(value = "/specialties/discipline", method = RequestMethod.DELETE)
-    void deleteDiscipline(@RequestParam("codeKaf") String codeKaf,
-                       @RequestParam("codeForm") String codeForm,
-                       @RequestParam("codeSpec") String codeSpec,
-                       @RequestParam("code") String codeDis){
-        specialtyDao.deleteDiscipline(codeDis, codeSpec, codeKaf, codeForm);
-    }
+
 
     /*@RequestMapping(value = "/specialty/{code}/specialty", method = RequestMethod.GET)
     void getSpetialtyByFakultet( @PathVariable(value="code") String code){

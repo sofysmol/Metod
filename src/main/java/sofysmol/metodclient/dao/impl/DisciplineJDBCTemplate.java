@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 import sofysmol.metodclient.dao.interf.DisciplineDao;
 import sofysmol.metodclient.data.Discipline;
+import sofysmol.metodclient.data.Sheduler;
 
 import javax.sql.DataSource;
 import java.sql.CallableStatement;
@@ -72,6 +73,25 @@ public class DisciplineJDBCTemplate implements DisciplineDao {
     public void insertDiscipline(Discipline fakultet){
         jdbcTemplate.update("insert into discipline (code_dis, NameD) values (?,?)",
                 fakultet.getCode(),fakultet.getName());
+    }
+    public void insertDiscipline(String codeDis,String codeSpec,
+                                 String codeKaf,String codeForm,
+                                 Sheduler sh){
+        jdbcTemplate.update("insert into spec_dis_form" +
+                        " (code_dis, code_spec, code_kaf, code_form," +
+                        " semester, h_lec, h_lab, h_pr, h_kurs, report)" +
+                        " values (?,?,?,?,?,?,?,?,?,?)",
+                codeDis, codeSpec, codeKaf, codeForm, sh.getSemester(),
+                sh.getLecture(), sh.getLab(), sh.getPrak(), sh.getKurs(),
+                sh.getReport());
+    }
+    public void deleteDiscipline(String codeDis,
+                                 String codeSpec,
+                                 String codeKaf,
+                                 String codeForm){
+        jdbcTemplate.update("delete from spec_dis_form" +
+                        " where code_kaf=? AND code_spec=? AND code_form=? AND code_dis=?",
+                codeKaf, codeSpec, codeForm, codeDis);
     }
     public void deleteSheduler(String semester, String codeDis,
                         String codeSpec, String codeKaf,

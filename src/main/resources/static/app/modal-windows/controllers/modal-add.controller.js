@@ -96,7 +96,7 @@ function openAddKafByFak(codeFak){
                $scope.table = table
                modals = this
                modals.ok = function(){
-                   postAndAddSomething($http, $rootScope,'/'+parent.tables[parent.index].name,
+                   postAndAddSomethingJson($http, $rootScope,'/'+parent.tables[parent.index].name,
                                     $scope.newItem, parent.tableContent, parent.index)
                }
                 modals.cancel = function(){
@@ -140,6 +140,20 @@ function postAndAddSomething($http, $rootScope,url, something, table, index){
           data: $.param(something),
           url: url,
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    }).then(function successCallback(response) {
+          table[index].push(something)
+          $rootScope.modalInstance.close('a')
+    }, function errorCallback(response) {
+          alert("Ошибка: не получилось добавить данные")
+          $rootScope.modalInstance.close('a')
+    });
+}
+function postAndAddSomethingJson($http, $rootScope,url, something, table, index){
+    $http({
+          method: 'POST',
+          data: something,//$.param(something),
+          url: url,
+
     }).then(function successCallback(response) {
           table[index].push(something)
           $rootScope.modalInstance.close('a')

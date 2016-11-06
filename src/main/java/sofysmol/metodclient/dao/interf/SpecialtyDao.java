@@ -22,9 +22,5 @@ public interface SpecialtyDao {
     void insertSpecialty(Specialty fakultet);
     void insertSpecialty(String codeSpec, String codeKaf,String codeForm);
     void deleteSpecialty(String codeSpec, String codeKaf,String codeForm);
-    void insertDiscipline(String codeDis,String codeSpec,
-                          String codeKaf,String codeForm,
-                          Sheduler sheduler);
     void setDataSource(DataSource ds);
-    void deleteDiscipline(String codeDis, String codeSpec, String codeKaf, String codeForm);
 }

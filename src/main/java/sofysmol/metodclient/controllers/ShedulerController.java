@@ -20,11 +20,11 @@ import java.util.List;
 public class ShedulerController {
     @Autowired
     private ShedulerDao shedulerDao;
-    @RequestMapping(value = {"/sheduler"}, params = {"code-spec","code-form", "code-kaf", "code-dis"})
+    @RequestMapping(value = {"/sheduler"}, params = {"codeSpec","codeForm", "codeKaf", "code-dis"})
     ResponseEntity<List<Sheduler>> getShedulerByCodeDis(
-            @RequestParam(value="code-spec") String codeSpec,
-            @RequestParam(value="code-form") String codeForm,
-            @RequestParam(value="code-kaf") String codeKaf,
+            @RequestParam(value="codeSpec") String codeSpec,
+            @RequestParam(value="codeForm") String codeForm,
+            @RequestParam(value="codeKaf") String codeKaf,
             @RequestParam(value="code-dis") String codeDis){
         return new ResponseEntity<List<Sheduler>>
                 (shedulerDao.getSheduler(codeDis, codeKaf, codeSpec,codeForm), HttpStatus.OK);
